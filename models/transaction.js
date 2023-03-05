@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const transactionSchema = new Schema({
     ticker: {type: String, required: true},
-    transactionType: {type: String, required: true},
+    transactionType: {type: Boolean, default: true},
     dollars: {type: Number, required: true},
     shares: {type: Number, required: true},
     comment: {type: String, required: true},
@@ -17,4 +17,4 @@ const transactionSchema = new Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('Note', noteSchema);
+module.exports = mongoose.model('Transaction', transactionSchema);

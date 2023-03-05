@@ -18,7 +18,7 @@ export default function App() {
         <>
           <NavBar user={user} setUser={setUser} />
           <Routes>
-            <Route path="/overview" element={<OverviewPage />} />
+            <Route path="/overview" element={<OverviewPage user={user}/>} />
             <Route path="/*" element={<Navigate to="/overview" />} />
           </Routes>
         </>
