@@ -23,6 +23,9 @@
 }
 
 .left-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border: solid rgba(238, 207, 58, 1);
     width: 50%;
     height: 100%;

@@ -1,0 +1,64 @@
+.transaction-form-ctr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10%;
+  width: 100%;
+}
+
+.transaction-form-ctr > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 10%;
+  width: 65%;
+  border: solid;
+}
+
+#buying-power {
+  font-size: 18px;
+  align-self: center;
+}
+
+.ticker-ctr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.amount-ctr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.options-ctr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.comment-ctr {
+  width: 90%;
+  height: 50px;
+}
+
+.ticker-ctr > * {
+  width: 40%;
+}
+.amount-ctr > * {
+  width: 40%;
+}
+.options-ctr > * {
+  width: 40%;
+}
+
+.comment-ctr > * {
+  width: 100%;
+  height: 50px;
+}
