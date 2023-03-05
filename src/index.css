@@ -1,5 +1,7 @@
 /* CSS Custom Properties */
 :root {
+  display: flex;
+  flex-direction: column;
   --white: #FFFFFF;
   --tan-1: #FBF9F6;
   --tan-2: #E7E2DD;
@@ -8,6 +10,9 @@
   --orange: #F67F00;
   --text-light: #968c84;
   --text-dark: #615954;
+  width: 80vw;
+  margin: 0 9vw 0 9vw;
+  border: solid rgba(238, 207, 58, 1);
 }
 
 *, *:before, *:after {
@@ -22,8 +27,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--tan-4);
-  padding: 2vmin;
+  /* padding: 2vmin; */
   height: 100vh;
+  background: rgba(28, 31, 39, 1);
 }
 
 code {
@@ -151,3 +157,4 @@ button[type="submit"] {
   grid-column: span 2;
   margin: 1vmin 0 0;
 }
+

@@ -1,0 +1,15 @@
+nav {
+    text-align: left;
+    color: white;
+    height: 8%;
+    padding-left: 2vmin;
+}
+
+.welcome {
+    color: white;
+    font-size: 28px;
+}
+
+.logout {
+    color:white;
+}
