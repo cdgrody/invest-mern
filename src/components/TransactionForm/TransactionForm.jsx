@@ -23,15 +23,6 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
     }
     fetchStockData()
   }, [newTransaction.ticker])
-  console.log(stockPrice)
-
-  // async function stockData() {
-  //   const stock = await getStockData("VOO");
-  //   console.log('stock>>>>>>>>>', stock, typeof(stock))
-  //   return stock
-  // }
-  // const stockValue = stockData();
-  // console.log('here is the stock value-----------------',stockValue)
 
   function handleChange(evt) {
     const newFormData = {
@@ -77,7 +68,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
               onChange={handleChange}
               value={newTransaction.dollars}
             ></input>
-            <label name="shares"> = shares</label>
+            <label name="shares"> {stockPrice ? newTransaction.dollars : 0} = shares</label>
           </div>
           <div className="options-ctr">
             <select name="public" onChange={handleChange} value={newTransaction.public}>
