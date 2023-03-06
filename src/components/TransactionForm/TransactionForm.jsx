@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./TransactionForm.css";
-
 import { addTransaction } from "../../utilities/transactions-api";
+import { getStockData } from "../../utilities/stock-api";
 
 export default function OverviewPage({ user, handleTransactionAdded }) {
   const [newTransaction, setNewTransaction] = useState({
@@ -13,6 +13,25 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
     public: true,
     user: user,
   });
+  const [stockPrice, setStockPrice] = useState(0)
+
+  useEffect(() => {
+    async function fetchStockData(){
+      const stockPrice = await getStockData(newTransaction.ticker);
+      // const stockPrice = await getStockData("XOM");
+      setStockPrice(stockPrice)
+    }
+    fetchStockData()
+  }, [newTransaction.ticker])
+  console.log(stockPrice)
+
+  // async function stockData() {
+  //   const stock = await getStockData("VOO");
+  //   console.log('stock>>>>>>>>>', stock, typeof(stock))
+  //   return stock
+  // }
+  // const stockValue = stockData();
+  // console.log('here is the stock value-----------------',stockValue)
 
   function handleChange(evt) {
     const newFormData = {
@@ -49,7 +68,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
               onChange={handleChange}
               value={newTransaction.ticker}
             ></input>
-            <label> = 1$ / share</label>
+            <label> = {stockPrice} $ / share</label>
           </div>
           <div className="amount-ctr">
             <input
