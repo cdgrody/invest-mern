@@ -27,9 +27,15 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
   function handleChange(evt) {
     const newFormData = {
       ...newTransaction,
+      shares: shareCalculator(),
       [evt.target.name]: evt.target.value,
     };
     setNewTransaction(newFormData);
+  }
+
+  function shareCalculator() {
+    if (!stockPrice) return 0
+    return newTransaction.dollars/stockPrice
   }
 
   async function handleSubmit(evt) {
@@ -68,7 +74,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
               onChange={handleChange}
               value={newTransaction.dollars}
             ></input>
-            <label name="shares"> {stockPrice ? newTransaction.dollars : 0} = shares</label>
+            <label name="shares"> = {shareCalculator().toFixed(2)} shares</label>
           </div>
           <div className="options-ctr">
             <select name="public" onChange={handleChange} value={newTransaction.public}>
