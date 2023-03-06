@@ -11,7 +11,6 @@ export default function TransactionCard({ transaction }) {
       <div className="ticker-date-ctr">
         <div className="ticker-card-text">{transaction.ticker}</div>
         <div>{dateFormat()[0]}</div>
-        <div>{dateFormat()[1]}</div>
       </div>
       <div className="ticker-card-price">
         {transaction.transactionType ? <div>+${transaction.dollars.toFixed(2)}</div> : <div>-${transaction.dollars.toFixed(2)}</div>}

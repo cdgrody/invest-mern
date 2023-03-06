@@ -1,16 +1,26 @@
 .transaction-card {
     display: flex;
     flex-direction: row;
+    padding: 4px;
     width: 60%;
     color: rgba(238, 207, 58, 1);
     margin: 4px 0 4px 0;
 }
 
 .transaction-card > * {
-    width: 80%;
+    width: 90%;
+}
+
+.transaction-card:hover {
+    border: solid rgba(238, 207, 58, 1);
+    cursor: pointer;
+    border-radius: 12px;
 }
 
 .ticker-date-ctr {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     font-size: 12px;
 }
 
@@ -21,5 +31,6 @@
 .ticker-card-price {
     display: flex;
     align-items: center;
-    font-size: 24px;
+    justify-content: flex-end;
+    font-size: 30px;
 }
