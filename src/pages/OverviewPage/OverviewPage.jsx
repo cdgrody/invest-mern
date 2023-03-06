@@ -1,15 +1,18 @@
 import './OverviewPage.css'
 import TransactionForm from '../../components/TransactionForm/TransactionForm'
+import TransactionList from '../../components/TransactionList/TransactionList'
 
-export default function OverviewPage({ user }) {
+export default function OverviewPage({ user, transactions, handleTransactionAdded }) {
     return (
         <div className="main-body">
             <div className="chart-area">Chart Area</div>
             <div className="bottom-half">
                 <div className="left-area">
-                <TransactionForm user={user}/>
+                <TransactionForm user={user} handleTransactionAdded={handleTransactionAdded}/>
                 </div>
-                <div className="right-area">Right Area</div>
+                <div className="right-area">
+                    <TransactionList user={user} transactions={transactions}/>
+                </div>
             </div>
         </div>
     )

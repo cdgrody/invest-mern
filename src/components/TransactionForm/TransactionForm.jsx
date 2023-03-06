@@ -3,7 +3,7 @@ import "./TransactionForm.css";
 
 import { addTransaction } from "../../utilities/transactions-api";
 
-export default function OverviewPage({ user }) {
+export default function OverviewPage({ user, handleTransactionAdded }) {
   const [newTransaction, setNewTransaction] = useState({
     ticker: "",
     transactionType: true,
@@ -34,6 +34,7 @@ export default function OverviewPage({ user }) {
       public: true,
       user: user,
     });
+    handleTransactionAdded(addedTransaction)
   }
 
   return (
