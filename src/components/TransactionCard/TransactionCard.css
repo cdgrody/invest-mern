@@ -1,0 +1,25 @@
+.transaction-card {
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    color: rgba(238, 207, 58, 1);
+    margin: 4px 0 4px 0;
+}
+
+.transaction-card > * {
+    width: 80%;
+}
+
+.ticker-date-ctr {
+    font-size: 12px;
+}
+
+.ticker-card-text {
+    font-size: 24px;
+}
+
+.ticker-card-price {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+}
