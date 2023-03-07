@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./TransactionCard.css";
-import "../TransactionDetail/TransactionDetail";
 
 export default function TransactionCard({ transaction }) {
   const [transactionDetail, setTransactionDetail] = useState(false);

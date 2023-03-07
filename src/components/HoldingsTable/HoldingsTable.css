@@ -1,0 +1,11 @@
+.holdings-table-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+
+}
+
+.holdings-table {
+    border: solid red;
+}

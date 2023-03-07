@@ -11,7 +11,6 @@ export async function getCryptoData(symbol) {
         {ticker: 'BNB', fullName: 'binancecoin', type: 'crypto', about: ' the native token of the Binance exchange and a key component of the Binance ecosystem.'},
         {ticker: 'ADA', fullName: 'binance-peg-cardano', type: 'crypto', about: 'a blockchain platform that aims to provide a more secure and sustainable infrastructure for decentralized applications.'},
     ]
-    console.log('gettttttttting crypto data', assetList[symbol].fullName.toLowerCase())
     try {
     const response = await fetch(`https://api.coingecko.com/api/v3/coins/${assetList[symbol].fullName.toLowerCase()}?tickers=true`);
     const data = await response.json();

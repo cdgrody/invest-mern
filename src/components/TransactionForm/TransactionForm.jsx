@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./TransactionForm.css";
 import { addTransaction } from "../../utilities/transactions-api";
+import { addHolding } from "../../utilities/holdings-api";
 import { getStockData } from "../../utilities/stock-api";
 import { getCryptoData } from "../../utilities/crypto-api";
 
@@ -21,13 +22,19 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
 
   const [newTransaction, setNewTransaction] = useState({
     asset: 10,
-    transactionType: true,
     dollars: 0,
     shares: 0,
     comment: "",
     public: true,
     user: user,
   });
+
+  const [newHolding, setNewHolding] = useState({
+    asset: 10,
+    shares: 0,
+    user: user,
+  });
+
   const [assetPrice, setAssetPrice] = useState(0)
 
   useEffect(() => {
@@ -50,14 +57,19 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
   }
 
   function handleChange(evt) {
-    const newFormData = {
+    const newTransactionData = {
       ...newTransaction,
       shares: shareCalculator(),
       [evt.target.name]: evt.target.value,
     };
-    setNewTransaction(newFormData);
+    const newHoldingData = {
+      ...newHolding,
+      shares: shareCalculator(),
+      [evt.target.name]: evt.target.value
+    }
+    setNewTransaction(newTransactionData);
+    setNewHolding(newHoldingData);
   }
-
 
   function shareCalculator() {
     if (!assetPrice) return 0
@@ -66,6 +78,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
+    const addedHolding = await addHolding(newHolding)    
     const addedTransaction = await addTransaction(newTransaction);
     setNewTransaction({
       asset: 10,
@@ -74,6 +87,11 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
       shares: 0,
       comment: "",
       public: true,
+      user: user,
+    });
+    setNewHolding({
+      asset: 10,
+      shares: 0,
       user: user,
     });
     return await handleTransactionAdded(addedTransaction)

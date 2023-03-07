@@ -1,8 +1,8 @@
-const Transaction = require('../../models/transaction')
+const Holding = require('../../models/holding')
 
 module.exports = {
     create,
-    index
+    // index
 }
 
 const assetList = [
@@ -21,19 +21,19 @@ const assetList = [
 async function create(req, res) {
     try {
         req.body.asset = assetList[req.body.asset]
-        // console.log(req.body)
-        const transaction = await Transaction.create(req.body)
-        res.json(transaction)
+        console.log(req.body)
+        const holding = await Holding.create(req.body)
+        res.json(holding)
     } catch (err) {
         res.status(400).json(err)
     }
 }
 
-async function index(req, res) {
-    try {
-        const transaction = await Transaction.find({ user: req.user, public: true }).sort( {createdAt: -1})
-        res.json(transaction)
-    } catch (err) {
-        res.status(400).json(err)
-    }
-}
+// async function index(req, res) {
+//     try {
+//         const transaction = await Transaction.find({ user: req.user, public: true }).sort( {createdAt: -1})
+//         res.json(transaction)
+//     } catch (err) {
+//         res.status(400).json(err)
+//     }
+// }
