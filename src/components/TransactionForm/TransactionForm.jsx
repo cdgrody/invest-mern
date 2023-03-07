@@ -32,16 +32,16 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
 
   useEffect(() => {
     async function fetchStockData(){
-      const stockPrice = await getStockData(newTransaction.ticker);
+      const stockPrice = await getStockData(newTransaction.asset);
       setAssetPrice(stockPrice)
     }
     async function fetchCryptoData(){
       console.log('crypto')
-      const cryptoPrice = await getCryptoData(newTransaction.ticker);
+      const cryptoPrice = await getCryptoData(newTransaction.asset);
       setAssetPrice(cryptoPrice)
     }
-    if(newTransaction.asset.type === 'stock') fetchStockData()
-    if(newTransaction.asset.type === 'crypto') crypto()
+    if(newTransaction.asset <= 4) fetchStockData()
+    if(newTransaction.asset > 4 && newTransaction.asset !== 10) fetchCryptoData()
   }, [newTransaction.asset])
 
   function checkForStockData(isValid){
@@ -102,13 +102,14 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
               <option value={8}>{assetList[8].ticker}</option>
               <option value={9}>{assetList[9].ticker}</option>
             </select>
-            <label> = {assetPrice} $ / share</label>
+            <label> = ${assetPrice} / share</label>
           </div>
           <div className="amount-ctr">
             <input
               name="dollars"
               placeholder="Enter $$$"
               onChange={handleChange}
+              type="number"
               value={newTransaction.dollars}
             ></input>
             <label name="shares"> = {shareCalculator().toFixed(2)} shares</label>
