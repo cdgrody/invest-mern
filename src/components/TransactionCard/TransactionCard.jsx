@@ -21,20 +21,47 @@ export default function TransactionCard({ transaction }) {
     return "";
   }
 
-    const idVal = transactionDetail ? 'detail-view' : ''
+  const idVal = transactionDetail ? "detail-view" : "";
 
   return (
-    <div
-      className="transaction-card"
-      id={idVal}
-      onClick={handleClick}
-      value={transaction}
-    >
+    <>
       {transactionDetail ? (
         <>
-          <div className="ticker-date-ctr">
-            <div className="ticker-card-text">{transaction.asset.ticker}</div>
-            <div className="ticker-card-price">
+          <div
+            className="transaction-card-detail"
+            id={idVal}
+            onClick={handleClick}
+            value={transaction}
+          >
+            <div className="ticker-date-ctr">
+              <div className="ticker-card-text">{transaction.asset.ticker}</div>
+              <div className="ticker-card-price">
+                {transaction.transactionType ? (
+                  <div>+${transaction.dollars.toFixed(2)}</div>
+                ) : (
+                  <div>-${transaction.dollars.toFixed(2)}</div>
+                )}
+              </div>
+            </div>
+            <div>
+              {dateFormat()[0]} @ {dateFormat()[1]}
+            </div>
+            <div>---------</div>
+            <div>"{transaction.comment}"</div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div
+            className="transaction-card-preview"
+            id={idVal}
+            onClick={handleClick}
+            value={transaction}
+          >
+            <div className="ticker-card-text-preview">
+              {transaction.asset.ticker}
+            </div>
+            <div className="ticker-card-price-preview">
               {transaction.transactionType ? (
                 <div>+${transaction.dollars.toFixed(2)}</div>
               ) : (
@@ -42,24 +69,8 @@ export default function TransactionCard({ transaction }) {
               )}
             </div>
           </div>
-            <div>{dateFormat()[0]} @ {dateFormat()[1]}</div>
-            <hr />
-            <div>"{transaction.comment}"</div>
-
-        </>
-      ) : (
-        <>
-          <div className="ticker-card-text-preview">{transaction.asset.ticker}
-          <div className="ticker-card-price-preview">
-            {transaction.transactionType ? (
-              <div>+${transaction.dollars.toFixed(2)}</div>
-            ) : (
-              <div>-${transaction.dollars.toFixed(2)}</div>
-            )}
-          </div>
-          </div>
         </>
       )}
-    </div>
+    </>
   );
 }
