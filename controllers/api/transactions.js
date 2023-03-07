@@ -31,8 +31,8 @@ async function create(req, res) {
 
 async function index(req, res) {
     try {
-        const transaction = await Transaction.find({ user: req.user, public: true }).sort( {createdAt: -1})
-        res.json(transaction)
+        const transactions = await Transaction.find({ user: req.user, public: true }).sort( {createdAt: -1})
+        res.json(transactions)
     } catch (err) {
         res.status(400).json(err)
     }

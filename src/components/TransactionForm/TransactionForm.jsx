@@ -72,14 +72,6 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
     setNewHolding(newHoldingData);
   }
 
-  function addHoldingToTransaction(addedHolding) {
-    const newTransactionData = {
-      ...newTransaction,
-      holding: addedHolding._id,
-    };
-    setNewTransaction(newTransactionData);
-  }
-
   function shareCalculator() {
     if (!assetPrice) return 0
     return newTransaction.dollars/assetPrice
@@ -88,9 +80,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     const addedHolding = await addHolding(newHolding);
-    console.log('added holding -----', addedHolding);
-    addHoldingToTransaction(addedHolding); 
-    console.log('new transactoin -----',newTransaction);
+    newTransaction.holding = addedHolding._id;
     const addedTransaction = await addTransaction(newTransaction);
     setNewTransaction({
       asset: 10,
@@ -98,6 +88,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
       dollars: 0,
       shares: 0,
       comment: "",
+      holding: null,
       public: true,
       user: user,
     });

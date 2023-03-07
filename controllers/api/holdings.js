@@ -19,11 +19,22 @@ const assetList = [
 ]
 
 async function create(req, res) {
+    console.log('create holding function -------')
     try {
         req.body.asset = assetList[req.body.asset]
         console.log(req.body)
-        const holding = await Holding.create(req.body)
-        res.json(holding)
+        const checkHolding = await Holding.find( {asset: req.body.asset} );
+        console.log('check holding function -------')
+        console.log(checkHolding)
+        if(checkHolding.length === 1) {
+            console.log('holding already created')
+            const holding = checkHolding[0];
+            res.json(holding)
+        } else {
+            console.log('holding DNE')
+            const holding = await Holding.create(req.body);
+            res.json(holding)
+        }
     } catch (err) {
         res.status(400).json(err)
     }
