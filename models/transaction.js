@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const transactionSchema = new Schema(
   {
-    ticker: { type: String, required: true },
+    asset: { type: Object, required: true },
     transactionType: { type: Boolean, default: true },
     dollars: { type: Number, required: true },
     shares: { type: Number, required: true },
