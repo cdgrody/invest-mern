@@ -16,11 +16,12 @@ export default function App() {
       const transactions = await getTransactions()
       setTransactions(transactions)
     }
-    if (user) fetchTransactions()
+    if (user) fetchTransactions();
   }, [user])
 
-  function handleTransactionAdded(newTransaction) {
-    setTransactions(transactions = [...transactions, newTransaction])
+  async function handleTransactionAdded(newTransaction) {
+    const newTransactions = [...transactions, newTransaction]
+    setTransactions(newTransactions)
   }
 
   return (

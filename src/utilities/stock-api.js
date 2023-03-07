@@ -9,20 +9,20 @@ const API_KEY_ARRAY = [
 let key_picker = 0;
 
 export async function getStockData(symbol) {
-  try {
-    key_picker += 1;
-    key_picker %= 5;
-    const API_KEY = API_KEY_ARRAY[key_picker];
-    const response = await fetch(
-      `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${API_KEY}`
-    );
-    const data = await response.json();
-    const price = data["Global Quote"]["05. price"];
-    return price;
-  } catch (error) {
-    console.log(error);
-    return 0;
-  }
+//   try {
+//     key_picker += 1;
+//     key_picker %= 5;
+//     const response = await fetch(
+//       `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${API_KEY_ARRAY[key_picker]}`
+//     );
+//     const data = await response.json();
+//     const price = data["Global Quote"]["05. price"];
+//     return price;
+//   } catch (error) {
+//     console.log(error);
+//     return 0;
+//   }
+return 50
 }
 
 //retrieved api key at https://www.alphavantage.co/

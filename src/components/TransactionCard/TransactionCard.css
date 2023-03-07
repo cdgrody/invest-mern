@@ -1,11 +1,18 @@
 .transaction-card {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     padding: 4px;
     width: 60%;
     color: rgba(238, 207, 58, 1);
     border: solid rgba(28, 31, 39, 1);
+    border-radius: 12px;
     margin: 4px 0 4px 0;
+}
+
+#detail-view {
+    background-color: lightgray;
+    color: black;
 }
 
 .transaction-card > * {
@@ -15,23 +22,30 @@
 .transaction-card:hover {
     border: solid rgba(238, 207, 58, 1);
     cursor: pointer;
-    border-radius: 12px;
 }
 
 .ticker-date-ctr {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: space-around;
+    justify-content: space-around;
     font-size: 12px;
 }
 
 .ticker-card-text {
     font-size: 24px;
+    align-self: center;
 }
 
 .ticker-card-price {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    font-size: 30px;
+    font-size: 24px;
+}
+
+.ticker-card-text-preview {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

@@ -18,11 +18,15 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
   useEffect(() => {
     async function fetchStockData(){
       const stockPrice = await getStockData(newTransaction.ticker);
-      // const stockPrice = await getStockData("XOM");
       setStockPrice(stockPrice)
     }
     fetchStockData()
   }, [newTransaction.ticker])
+
+  function checkForStockData(isValid){
+    if (isValid) return newTransaction.ticker
+    isValid = false
+  }
 
   function handleChange(evt) {
     const newFormData = {
@@ -50,7 +54,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
       public: true,
       user: user,
     });
-    handleTransactionAdded(addedTransaction)
+    return await handleTransactionAdded(addedTransaction)
   }
 
   return (

@@ -6,7 +6,7 @@ const ensureLoggedIn = require('../../config/ensureLoggedIn')
 // All paths start with '/api/transactions'
 
 // POST /api/users
-router.post('/', transactionsCtrl.create);
-router.get('/', transactionsCtrl.index);
+router.post('/', ensureLoggedIn, transactionsCtrl.create);
+router.get('/', ensureLoggedIn, transactionsCtrl.index);
 
 module.exports = router;
