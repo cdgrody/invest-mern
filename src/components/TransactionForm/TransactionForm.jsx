@@ -104,7 +104,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
     <>
       <div className="transaction-form-ctr">
         <form className="left-area-body" onSubmit={handleSubmit}>
-          <label id="buying-power">Buying Power: $100</label>
+          <label id="buying-power">Buying Power: ${user.balance}</label>
           <div className="ticker-ctr">
             <select
               name="asset"
