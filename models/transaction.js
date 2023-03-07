@@ -14,6 +14,11 @@ const transactionSchema = new Schema(
       ref: "User",
       required: true,
     },
+    holding: {
+      type: Schema.Types.ObjectId,
+      ref: "Holding",
+      required: true,
+    }
   },
   {
     timestamps: true,
