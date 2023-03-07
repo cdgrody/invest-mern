@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10%;
   width: 100%;
 }
 
@@ -11,8 +10,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin-top: 10%;
   width: 65%;
+  color: rgba(238, 207, 58, 1);
 }
 
 #buying-power {
@@ -66,4 +65,18 @@
 
 .transact-button {
     color: black;
+}
+
+
+.transaction-selector, .ticker-selector, .public-selector  {
+  background: rgba(28, 31, 39, 1);
+  color: rgba(238, 207, 58, 1);
+  border: solid rgba(238, 207, 58, 1) .1px;
+}
+
+
+.enter-dollars-input, .enter-comment-input {
+  background: rgba(28, 31, 39, 1);
+  color: rgba(238, 207, 58, 1);
+  border: solid rgba(238, 207, 58, 1) .1px;
 }

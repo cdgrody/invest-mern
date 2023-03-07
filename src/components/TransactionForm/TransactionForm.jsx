@@ -89,6 +89,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
               name="asset"
               onChange={handleChange}
               value={newTransaction.asset}
+              className="ticker-selector"
             >
               <option>Select</option>
               <option value={0}>{assetList[0].ticker}</option>
@@ -111,15 +112,16 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
               onChange={handleChange}
               type="number"
               value={newTransaction.dollars}
+              className="enter-dollars-input"
             ></input>
             <label name="shares"> = {shareCalculator().toFixed(2)} shares</label>
           </div>
           <div className="options-ctr">
-            <select name="public" onChange={handleChange} value={newTransaction.public}>
+            <select name="public" onChange={handleChange} value={newTransaction.public} className="public-selector">
               <option value={true}>Public</option>
               <option value={false}>Private</option>
             </select>
-            <select name="transactionType" onChange={handleChange} value={newTransaction.transactionType}>
+            <select name="transactionType" onChange={handleChange} value={newTransaction.transactionType} className="transaction-selector">
               <option value={true}>Buy</option>
               <option value={false}>Sell</option>
             </select>
@@ -130,6 +132,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
               placeholder="comment..."
               onChange={handleChange}
               value={newTransaction.comment}
+              className="enter-comment-input"
             ></input>
           </div>
           <button className="transact-button" type="submit">
