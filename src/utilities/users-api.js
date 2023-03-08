@@ -12,3 +12,8 @@ export function login(credentials) {
 export function checkToken() {
     return sendRequest(`${BASE_URL}/check-token`)
 }
+
+export function updateUser(userBalance) {
+    console.log('updateUser in api ---------------', userBalance)
+    return sendRequest(`${BASE_URL}/${userBalance._id}`, 'PUT', userBalance)
+}

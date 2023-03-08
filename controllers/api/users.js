@@ -5,7 +5,8 @@ const User = require('../../models/user')
 module.exports = {
     create,
     login,
-    checkToken
+    checkToken,
+    update
 }
 
 async function create(req, res) {
@@ -35,6 +36,23 @@ function checkToken(req, res) {
     console.log('req.user', req.user)
     res.json(req.exp)
 }
+
+async function update(req, res) {
+    console.log('update user function ---------')
+    try {
+        const user = await User.findById( req.user._id)
+        const newBalance = req.body.balance;    
+        console.log('user to update after this ---------', user.balance, newBalance)
+            await user.updateOne({ balance: newBalance });
+            
+            console.log(user)
+            res.json(user)
+
+    } catch (err) {
+        res.status(400).json(err)
+    }
+}
+
 
 /*-- Helper Functions --*/
 

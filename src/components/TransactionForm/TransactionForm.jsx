@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./TransactionForm.css";
 import { addTransaction } from "../../utilities/transactions-api";
 import { addHolding } from "../../utilities/holdings-api";
+import { updateUser } from "../../utilities/users-api";
 import { getStockData } from "../../utilities/stock-api";
 import { getCryptoData } from "../../utilities/crypto-api";
 
@@ -22,6 +23,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
 
   const [newTransaction, setNewTransaction] = useState({
     asset: 10,
+    transactionType: -1,
     dollars: 0,
     shares: 0,
     comment: "",
@@ -38,13 +40,14 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
 
   const [assetPrice, setAssetPrice] = useState(0)
 
+  const [userBalance, setUserBalance] = useState(user)
+
   useEffect(() => {
     async function fetchStockData(){
       const stockPrice = await getStockData(newTransaction.asset);
       setAssetPrice(stockPrice)
     }
     async function fetchCryptoData(){
-      console.log('crypto')
       const cryptoPrice = await getCryptoData(newTransaction.asset);
       setAssetPrice(cryptoPrice)
     }
@@ -79,12 +82,25 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
+    // console.log('user balance >>>>>>>', userBalance)
+    const newBalance = userBalance.balance - newTransaction.dollars
+    // console.log('user newbalance >>>>>>>', newBalance)
+    // const userBalanceData = {
+    //   balance: newBalance,
+    //   ...user,
+    // };
+    userBalance.balance = newBalance;
+    setUserBalance(userBalance)
+    // console.log('user balance updated >>>>>>>', userBalance)
+    const addUpdatedUser = await updateUser(userBalance)
     const addedHolding = await addHolding(newHolding);
     newTransaction.holding = addedHolding._id;
     const addedTransaction = await addTransaction(newTransaction);
+
+    setUserBalance(user)
     setNewTransaction({
       asset: 10,
-      transactionType: true,
+      transactionType: -1,
       dollars: 0,
       shares: 0,
       comment: "",
@@ -97,14 +113,14 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
       shares: 0,
       user: user,
     });
-    return await handleTransactionAdded(addedTransaction)
+    return await handleTransactionAdded(addedTransaction, addUpdatedUser)
   }
 
   return (
     <>
       <div className="transaction-form-ctr">
         <form className="left-area-body" onSubmit={handleSubmit}>
-          <label id="buying-power">Buying Power: ${user.balance}</label>
+          <label id="buying-power">Buying Power: ${userBalance.balance - newTransaction.dollars}</label>
           <div className="ticker-ctr">
             <select
               name="asset"
@@ -134,6 +150,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
               type="number"
               value={newTransaction.dollars}
               className="enter-dollars-input"
+              min="1"
             ></input>
             <label name="shares"> = {shareCalculator().toFixed(2)} shares</label>
           </div>
@@ -143,8 +160,8 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
               <option value={false}>Private</option>
             </select>
             <select name="transactionType" onChange={handleChange} value={newTransaction.transactionType} className="transaction-selector">
-              <option value={true}>Buy</option>
-              <option value={false}>Sell</option>
+              <option value={-1}>Buy</option>
+              <option value={1}>Sell</option>
             </select>
           </div>
           <div className="comment-ctr">
