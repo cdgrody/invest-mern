@@ -41,10 +41,11 @@ async function update(req, res) {
     console.log('update user function ---------')
     try {
         const user = await User.findById( req.user._id)
+        // const newBalance = user.balance - 10;   
         const newBalance = req.body.balance;    
-        console.log('user to update after this ---------', user.balance, newBalance)
-            await user.updateOne({ balance: newBalance });
-            
+        user.balance = newBalance 
+             console.log(user)
+            await user.updateOne({ balance: newBalance });     
             console.log(user)
             res.json(user)
 

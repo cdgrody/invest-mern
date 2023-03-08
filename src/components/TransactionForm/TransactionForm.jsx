@@ -91,8 +91,8 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
     // };
     userBalance.balance = newBalance;
     setUserBalance(userBalance)
-    // console.log('user balance updated >>>>>>>', userBalance)
     const addUpdatedUser = await updateUser(userBalance)
+    console.log('add updated user >>>>>>>', addUpdatedUser.balance - newTransaction.dollars)
     const addedHolding = await addHolding(newHolding);
     newTransaction.holding = addedHolding._id;
     const addedTransaction = await addTransaction(newTransaction);
