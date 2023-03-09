@@ -1,0 +1,15 @@
+svg {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    height: 100%;
+    width: 180%;
+}
+
+.recharts-wrapper {
+    width: 20%;
+}
+
+#chart-container {
+    width: 50%;
+}
