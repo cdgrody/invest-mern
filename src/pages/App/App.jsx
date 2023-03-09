@@ -18,7 +18,7 @@ export default function App() {
       setTransactions(transactions);
     }
     const storedUser = localStorage.getItem('user');
-    if (storedUser) setUser(JSON.parse(storedUser))
+    // if (storedUser) setUser(JSON.parse(storedUser))
     // async function fetchUser() {
       // const userData = await getUser();
       // // console.log('userData from app.jsx end', user)
@@ -28,7 +28,7 @@ export default function App() {
       // fetchUser();
       fetchTransactions()
     };
-  }, []);
+  }, [user]);
 
   console.log('user in the app.jsx', user)
 
@@ -36,7 +36,7 @@ export default function App() {
     const newTransactions = [...transactions, newTransaction];
     setTransactions(newTransactions);
     setUser(addUpdatedUser);
-    localStorage.setItem('user', JSON.stringify(addUpdatedUser));
+    // localStorage.setItem('user', JSON.stringify(addUpdatedUser));
   }
 
   return (
