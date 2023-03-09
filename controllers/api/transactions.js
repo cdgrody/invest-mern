@@ -20,7 +20,6 @@ const assetList = [
 ]
 
 async function create(req, res) {
-    console.log('enter create transaction function >>>>>>>>>>>>>>>>>>')
     try {
         const user = await User.findById( req.user._id)
         req.body.asset = assetList[req.body.asset]

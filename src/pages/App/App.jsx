@@ -10,26 +10,33 @@ import NavBar from "../../components/NavBar/NavBar";
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [transactions, setTransactions] = useState([]);
+  const [holdings, setHoldings] = useState([])
 
   useEffect(() => {
     async function fetchTransactions() {
       const transactions = await getTransactions();
       setTransactions(transactions);
     }
-    async function fetchUser() {
-      const user = await getUser();
-      setUser(user);
-    }
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) setUser(JSON.parse(storedUser))
+    // async function fetchUser() {
+      // const userData = await getUser();
+      // // console.log('userData from app.jsx end', user)
+      // setUser(userData);
+    // }
     if (user) {
       // fetchUser();
       fetchTransactions()
     };
-  }, [user]);
+  }, []);
 
-  async function handleTransactionAdded(newTransaction, updatedUser) {
+  console.log('user in the app.jsx', user)
+
+  async function handleTransactionAdded(newTransaction, addUpdatedUser) {
     const newTransactions = [...transactions, newTransaction];
     setTransactions(newTransactions);
-    setUser(updatedUser);
+    setUser(addUpdatedUser);
+    localStorage.setItem('user', JSON.stringify(addUpdatedUser));
   }
 
   return (
@@ -45,6 +52,8 @@ export default function App() {
                   user={user}
                   handleTransactionAdded={handleTransactionAdded}
                   transactions={transactions}
+                  holdings={holdings}
+                  setUser={user}
                 />
               }
             />

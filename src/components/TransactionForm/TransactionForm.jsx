@@ -3,10 +3,11 @@ import "./TransactionForm.css";
 import { addTransaction } from "../../utilities/transactions-api";
 import { addHolding } from "../../utilities/holdings-api";
 import { updateUser } from "../../utilities/users-api";
+import { updateUserData } from "../../utilities/users-service";
 import { getStockData } from "../../utilities/stock-api";
 import { getCryptoData } from "../../utilities/crypto-api";
 
-export default function OverviewPage({ user, handleTransactionAdded }) {
+export default function OverviewPage({ user, setUser, handleTransactionAdded }) {
 
   const assetList = [
     {ticker: 'VOO', fullName: 'Vanguard S&P 500 ETF', type: 'stock', about: 'Vanguard S&P 500 ETF - This fund tracks the performance of the S&P 500 index, which consists of 500 large-cap U.S. stocks.'},
@@ -41,6 +42,9 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
   const [assetPrice, setAssetPrice] = useState(0)
 
   const [userBalance, setUserBalance] = useState(user)
+  console.log('userData from first render', user)
+
+  
 
   useEffect(() => {
     async function fetchStockData(){
@@ -53,6 +57,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
     }
     if(newTransaction.asset <= 4) fetchStockData()
     if(newTransaction.asset > 4 && newTransaction.asset !== 10) fetchCryptoData()
+    setUserBalance(user)
   }, [newTransaction.asset])
 
   function checkForStockData(isValid){
@@ -82,21 +87,14 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    // console.log('user balance >>>>>>>', userBalance)
-    const newBalance = userBalance.balance - newTransaction.dollars
-    // console.log('user newbalance >>>>>>>', newBalance)
-    // const userBalanceData = {
-    //   balance: newBalance,
-    //   ...user,
-    // };
+    const newBalance = userBalance.balance + parseInt(newTransaction.transactionType) * newTransaction.dollars
     userBalance.balance = newBalance;
     setUserBalance(userBalance)
     const addUpdatedUser = await updateUser(userBalance)
-    console.log('add updated user >>>>>>>', addUpdatedUser.balance - newTransaction.dollars)
+    // console.log('add updated user >>>>>>>', addUpdatedUser.balance - newTransaction.dollars)
     const addedHolding = await addHolding(newHolding);
     newTransaction.holding = addedHolding._id;
     const addedTransaction = await addTransaction(newTransaction);
-
     setUserBalance(user)
     setNewTransaction({
       asset: 10,
@@ -120,7 +118,7 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
     <>
       <div className="transaction-form-ctr">
         <form className="left-area-body" onSubmit={handleSubmit}>
-          <label id="buying-power">Buying Power: ${userBalance.balance - newTransaction.dollars}</label>
+          <label id="buying-power">Buying Power: ${userBalance.balance + parseInt(newTransaction.transactionType) * newTransaction.dollars}</label>
           <div className="ticker-ctr">
             <select
               name="asset"
@@ -160,8 +158,8 @@ export default function OverviewPage({ user, handleTransactionAdded }) {
               <option value={false}>Private</option>
             </select>
             <select name="transactionType" onChange={handleChange} value={newTransaction.transactionType} className="transaction-selector">
-              <option value={-1}>Buy</option>
-              <option value={1}>Sell</option>
+              <option value="-1">Buy</option>
+              <option value="1">Sell</option>
             </select>
           </div>
           <div className="comment-ctr">

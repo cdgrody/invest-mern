@@ -26,7 +26,6 @@ async function create(req, res) {
             const holding = checkHolding[0];
             res.json(holding)
         } else {
-            console.log('holding DNE')
             const holding = await Holding.create(req.body);
             res.json(holding)
         }
