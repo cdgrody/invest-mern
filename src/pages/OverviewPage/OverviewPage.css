@@ -40,3 +40,19 @@
     width: 50%;
     height: 100%;
 }
+
+@media (max-width: 768px) {
+    .bottom-half {
+      flex-direction: column-reverse;
+      align-items: flex-center;
+      width: 100%;
+    }
+    .left-area {
+        width: 80%;
+        margin: 0 10% 0 10%;
+    }
+    .right-area {
+        width: 80%;
+        margin: 0 10% 0 10%;
+    }
+  }
