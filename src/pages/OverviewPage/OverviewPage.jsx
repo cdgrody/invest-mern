@@ -16,15 +16,15 @@ export default function OverviewPage({
   const [showAI, setShowAI] = useState(true);
 
   function handleTransactionFormShow() {
-    setShowTransactionForm(!showTransactionForm)
+    setShowTransactionForm(!showTransactionForm);
   }
 
   function handleShowNews() {
-    setShowNews(!showNews)
+    setShowNews(!showNews);
   }
 
   function handleShowAI() {
-    setShowAI(!showAI)
+    setShowAI(!showAI);
   }
 
   return (
@@ -34,22 +34,62 @@ export default function OverviewPage({
         <div className="left-area">
           {showTransactionForm ? (
             <>
-            <div className="transaction-form-preview" onClick={handleTransactionFormShow}>New Transaction ▶</div>
+              <div
+                className="transaction-form-preview"
+                onClick={handleTransactionFormShow}
+              >
+                New Transaction ▶
+              </div>
             </>
           ) : (
             <>
-            <div className="transaction-form-preview" onClick={handleTransactionFormShow}>New Transaction ▼</div>
-            <div className="transaction-form">
-              <TransactionForm
-                user={user}
-                handleTransactionAdded={handleTransactionAdded}
-                userBalances={userBalances}
+              <div
+                className="transaction-form-preview"
+                onClick={handleTransactionFormShow}
+              >
+                New Transaction ▼
+              </div>
+              <div className="transaction-form">
+                <TransactionForm
+                  user={user}
+                  handleTransactionAdded={handleTransactionAdded}
+                  userBalances={userBalances}
                 />
-            </div>
-                </>
+              </div>
+            </>
           )}
-            <div className="news-preview" onClick={handleShowNews}>Show Crypto News ▶</div>
-            <div className="ai-investing-advice-preview" onClick={handleShowAI}>AI Investing Advice ▶</div>
+          {showNews ? (
+            <>
+              <div className="news-preview" onClick={handleShowNews}>
+                Show Crypto News ▶
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="news-preview" onClick={handleShowNews}>
+                Show Crypto News ▼
+              </div>
+            </>
+          )}
+          {showAI ? (
+            <>
+              <div
+                className="ai-investing-advice-preview"
+                onClick={handleShowAI}
+              >
+                AI Investing Advice ▶
+              </div>
+            </>
+          ) : (
+            <>
+              <div
+                className="ai-investing-advice-preview"
+                onClick={handleShowAI}
+              >
+                AI Investing Advice ▼
+              </div>
+            </>
+          )}
         </div>
         <div className="right-area">
           <TransactionList
