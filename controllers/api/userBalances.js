@@ -18,8 +18,10 @@ async function create(req, res) {
 
 async function index(req, res) {
     try {
-        const userBalance = UserBalance.find({ user: req.user })
-        res.json(userBalance)
+        console.log('index userbalance controller -------------', req.user)
+        const userBalance = await UserBalance.find({ user: req.user })
+        console.log(' userbalance  <><><><>>><<>>', userBalance)
+        res.json(userBalance[0])
     } catch (err) {
         res.status(400).json(err)
     }

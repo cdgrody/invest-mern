@@ -13,7 +13,6 @@ export default async function sendRequest(url, method = 'GET', payload = null) {
         options.headers ||= {}
         options.headers.Authorization = `Bearer ${token}`
     }
-    console.log('options <<<<<<<<', url)
     const res = await fetch(url, options);
     // res.ok will be false if the status code set is not 2xx
     if (res.ok) return res.json();

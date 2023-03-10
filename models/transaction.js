@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const transactionSchema = new Schema(
   {
     asset: { type: Object, required: true },
-    transactionType: { type: Number, min: -1, max: 1, default: -1 },
+    transactionType: { type: String, default: "-1" },
     dollars: { type: Number, required: true },
     shares: { type: Number, required: true },
     comment: { type: String, required: true },

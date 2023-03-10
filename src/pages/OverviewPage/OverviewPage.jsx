@@ -1,22 +1,31 @@
-import './OverviewPage.css'
-import TransactionForm from '../../components/TransactionForm/TransactionForm'
-import TransactionList from '../../components/TransactionList/TransactionList'
-import ChartArea from '../../components/ChartArea/ChartArea'
+import "./OverviewPage.css";
+import TransactionForm from "../../components/TransactionForm/TransactionForm";
+import TransactionList from "../../components/TransactionList/TransactionList";
+import ChartArea from "../../components/ChartArea/ChartArea";
 
-export default function OverviewPage({ user, transactions, handleTransactionAdded }) {
-    return (
-        <div className="main-body">
-            <div className="chart-area">
-                <ChartArea />
-            </div>
-            <div className="bottom-half">
-                <div className="left-area">
-                <TransactionForm user={user} handleTransactionAdded={handleTransactionAdded}/>
-                </div>
-                <div className="right-area">
-                    <TransactionList user={user} transactions={transactions}/>
-                </div>
-            </div>
+export default function OverviewPage({
+  user,
+  transactions,
+  handleTransactionAdded,
+  userBalances
+}) {
+  return (
+    <div className="main-body">
+      <div className="chart-area">
+        <ChartArea />
+      </div>
+      <div className="bottom-half">
+        <div className="left-area">
+          <TransactionForm
+            user={user}
+            handleTransactionAdded={handleTransactionAdded}
+            userBalances={userBalances}
+          />
         </div>
-    )
+        <div className="right-area">
+          <TransactionList user={user} transactions={transactions} />
+        </div>
+      </div>
+    </div>
+  );
 }
