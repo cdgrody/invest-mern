@@ -14,6 +14,5 @@ export function checkToken() {
 }
 
 export function updateUser(userBalance) {
-    console.log('updateUser in api ---------------', userBalance)
     return sendRequest(`${BASE_URL}/${userBalance._id}`, 'PUT', userBalance)
 }

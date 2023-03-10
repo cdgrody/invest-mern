@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import { getTransactions } from "../../utilities/transactions-api";
+import { getUserBalances } from "../../utilities/userBalances-api"
 import AuthPage from "../AuthPage/AuthPage";
 import OverviewPage from "../OverviewPage/OverviewPage";
 import NavBar from "../../components/NavBar/NavBar";
@@ -10,6 +11,7 @@ import NavBar from "../../components/NavBar/NavBar";
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [transactions, setTransactions] = useState([]);
+  const [userBalances, setUserBalances] = useState(getUserBalances());
 
   useEffect(() => {
     async function fetchTransactions() {
@@ -20,8 +22,11 @@ export default function App() {
       const user = await getUser();
       setUser(user);
     }
+    async function fetchUserBalances() {
+      const userBalances = await getUserBalances();
+      setUserBalances(userBalances);
+    }
     if (user) {
-      // fetchUser();
       fetchTransactions()
     };
   }, [user]);
@@ -45,6 +50,7 @@ export default function App() {
                   user={user}
                   handleTransactionAdded={handleTransactionAdded}
                   transactions={transactions}
+                  userBalances={userBalances}
                 />
               }
             />
