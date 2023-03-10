@@ -2,7 +2,7 @@ const Holding = require('../../models/holding')
 
 module.exports = {
     create,
-    // index
+    index
 }
 
 const assetList = [
@@ -35,11 +35,11 @@ async function create(req, res) {
     }
 }
 
-// async function index(req, res) {
-//     try {
-//         const transaction = await Transaction.find({ user: req.user, public: true }).sort( {createdAt: -1})
-//         res.json(transaction)
-//     } catch (err) {
-//         res.status(400).json(err)
-//     }
-// }
+async function index(req, res) {
+    try {
+        const holdings = await Holding.find({ user: req.user })
+        res.json(holdings)
+    } catch (err) {
+        res.status(400).json(err)
+    }
+}

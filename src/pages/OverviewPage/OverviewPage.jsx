@@ -7,7 +7,8 @@ export default function OverviewPage({
   user,
   transactions,
   handleTransactionAdded,
-  userBalances
+  userBalances,
+  holdings
 }) {
   return (
     <div className="main-body">
@@ -23,7 +24,7 @@ export default function OverviewPage({
           />
         </div>
         <div className="right-area">
-          <TransactionList user={user} transactions={transactions} />
+          <TransactionList user={user} transactions={transactions} holdings={holdings}/>
         </div>
       </div>
     </div>

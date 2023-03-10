@@ -7,11 +7,13 @@ import { getUserBalances } from "../../utilities/userBalances-api"
 import AuthPage from "../AuthPage/AuthPage";
 import OverviewPage from "../OverviewPage/OverviewPage";
 import NavBar from "../../components/NavBar/NavBar";
+import { getHoldings } from "../../utilities/holdings-api";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [transactions, setTransactions] = useState([]);
   const [userBalances, setUserBalances] = useState(getUserBalances());
+  const [holdings, setHoldings] = useState(getHoldings());
 
   useEffect(() => {
     async function fetchTransactions() {
@@ -26,9 +28,14 @@ export default function App() {
       const userBalances = await getUserBalances();
       setUserBalances(userBalances);
     }
+    async function fetchUpdatedHoldings() {
+      const holdings = await getHoldings();
+      setHoldings(holdings);
+    }
     if (user) {
       fetchTransactions()
       fetchUserBalances()
+      fetchUpdatedHoldings()
     };
   }, [user]);
 
@@ -52,6 +59,7 @@ export default function App() {
                   handleTransactionAdded={handleTransactionAdded}
                   transactions={transactions}
                   userBalances={userBalances}
+                  holdings={holdings}
                 />
               }
             />
