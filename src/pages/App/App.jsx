@@ -12,7 +12,6 @@ export default function App() {
   const [user, setUser] = useState(getUser());
   const [transactions, setTransactions] = useState([]);
   const [userBalances, setUserBalances] = useState(getUserBalances());
-  console.log('userBalances app.jsx', userBalances)
 
   useEffect(() => {
     async function fetchTransactions() {
@@ -25,7 +24,6 @@ export default function App() {
     }
     async function fetchUserBalances() {
       const userBalances = await getUserBalances();
-      console.log('userBalances in use efect', userBalances)
       setUserBalances(userBalances);
     }
     if (user) {
@@ -34,9 +32,10 @@ export default function App() {
     };
   }, [user]);
 
-  async function handleTransactionAdded(newTransaction) {
+  async function handleTransactionAdded(newTransaction, addUpdatedUserBalances) {
     const newTransactions = [...transactions, newTransaction];
     setTransactions(newTransactions);
+    setUserBalances(addUpdatedUserBalances)
   }
 
   return (

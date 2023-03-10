@@ -6,7 +6,6 @@ module.exports = {
     create,
     login,
     checkToken,
-    update
 }
 
 async function create(req, res) {
@@ -35,23 +34,6 @@ async function login(req, res) {
 function checkToken(req, res) {
     console.log('req.user', req.user)
     res.json(req.exp)
-}
-
-async function update(req, res) {
-    console.log('update user function ---------')
-    try {
-        const user = await User.findById( req.user._id)
-        // const newBalance = user.balance - 10;   
-        const newBalance = req.body.balance;    
-        user.balance = newBalance 
-             console.log(user)
-            await user.updateOne({ balance: newBalance });     
-            console.log(user)
-            res.json(user)
-
-    } catch (err) {
-        res.status(400).json(err)
-    }
 }
 
 

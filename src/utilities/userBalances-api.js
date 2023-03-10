@@ -9,3 +9,8 @@ export async function createBalance(userBalanceData) {
 export async function getUserBalances() {
     return sendRequest(BASE_URL, 'GET')
 }
+
+export async function updateUserBalances(userBalancesData) {
+    console.log("userBalancesData", userBalancesData._id)
+    return sendRequest(`${BASE_URL}/${userBalancesData._id}`, 'PUT', userBalancesData)
+}

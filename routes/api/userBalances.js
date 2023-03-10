@@ -7,5 +7,6 @@ const userBalancesCtrl = require('../../controllers/api/userBalances');
 // POST /api/users
 router.get('/', userBalancesCtrl.index);
 router.post('/', userBalancesCtrl.create);
+router.put('/:id', userBalancesCtrl.update);
 
 module.exports = router;
