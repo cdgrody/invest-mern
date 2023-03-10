@@ -13,7 +13,7 @@ export default function OverviewPage({
   return (
     <div className="main-body">
       <div className="chart-area">
-        <ChartArea />
+        {/* <ChartArea /> */}
       </div>
       <div className="bottom-half">
         <div className="left-area">
