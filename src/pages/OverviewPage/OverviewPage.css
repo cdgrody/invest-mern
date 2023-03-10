@@ -17,7 +17,6 @@
     padding: 0;
 }
 
-
 .bottom-half {
     display: flex;
     flex-direction: row;
@@ -32,6 +31,7 @@
     align-items: center;
     width: 50%;
     height: 100%;
+    margin-top: 5%;
 }
 
 .right-area {
@@ -39,6 +39,23 @@
     flex-direction: column;
     width: 50%;
     height: 100%;
+}
+
+.transaction-form-preview, .news-preview, .ai-investing-advice-preview {
+    font-size: 24px;
+    background-color: rgba(238, 207, 58, 1);
+    color: black;
+    cursor: pointer;
+    width: 80%;
+    border: solid black 2px;
+}  
+
+.transaction-form-preview:hover, .news-preview:hover, .ai-investing-advice-preview:hover {
+    background-color: rgba(238, 208, 58, 0.641);
+}
+
+.transaction-form {
+    width: 100%;
 }
 
 @media (max-width: 768px) {
