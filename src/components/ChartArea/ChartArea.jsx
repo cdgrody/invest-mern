@@ -1,67 +1,48 @@
-import "./ChartArea.css";
+import React from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-import {
-  LineChart,
-  ResponsiveContainer,
-  Legend,
-  Tooltip,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-} from "recharts";
 
-const data = [
-  { name: "Page A", uv: 400, pv: 2400, amt: 2400 },
-  { name: "Page B", uv: 40, pv: 240, amt: 240 },
-];
+export default function ChartArea({holdings}) {
 
-export default function App() {
+  const data = [
+    {
+      name: 'DOGE',
+      dollars: 2000,
+    },
+    {
+      name: 'VOO',
+      dollars: 3000,
+    },
+    {
+      name: 'ETH',
+      dollars: -2000,
+    },
+    {
+      name: 'AGG',
+      dollars: 2780,
+    },
+  ];
+
   return (
-    <>
-      <div className="chart-ctr" style={{ overflowX: "hidden" }}>
-        <ResponsiveContainer width="80%" aspect={4.5}>
-          <LineChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 15,
-              right: 600,
-              bottom: 0,
-              left: -400,
-            }}
-            responsive={true}
-          >
-            <CartesianGrid horizontal="true" vertical="" stroke="#243240" />
-            <XAxis dataKey="name" tick={{ fill: "#fff" }} />
-            <YAxis tick={{ fill: "#fff" }} />
-            <Tooltip
-              contentStyle={{ backgroundColor: "#8884d8", color: "#fff" }}
-              itemStyle={{ color: "#fff" }}
-              cursor={false}
-            />
-            <Line
-              type="monotone"
-              dataKey="Iphone"
-              stroke="#8884d8"
-              strokeWidth="5"
-              dot={{
-                fill: "#2e4355",
-                stroke: "#8884d8",
-                strokeWidth: 2,
-                r: 5,
-              }}
-              activeDot={{
-                fill: "#2e4355",
-                stroke: "#8884d8",
-                strokeWidth: 5,
-                r: 10,
-              }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-    </>
+    <ResponsiveContainer width="80%" height="100%">
+      <LineChart
+        width={500}
+        height={300}
+        data={data}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="dollars" stroke="yellow" activeDot={{ r: 8 }} />
+      </LineChart>
+    </ResponsiveContainer>
   );
 }
