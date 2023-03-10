@@ -15,7 +15,7 @@ export default function HoldingsTable({ transactions, holdings }) {
     }
     async function updateHoldingsTable() {
       const newHoldings = await getHoldings();
-      setTransactionList(newHoldings);
+      setNewHoldings(newHoldings);
     }
     updateTransactionList();
     updateHoldingsTable();
@@ -25,7 +25,7 @@ export default function HoldingsTable({ transactions, holdings }) {
   return (
     <>
       <div className="holdings-table-area">
-        {/* <table>
+        <table>
           <thead>
             <tr>
               <th>Ticker</th>
@@ -35,25 +35,11 @@ export default function HoldingsTable({ transactions, holdings }) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>AAPL</td>
-              <td>10</td>
-              <td>$1200</td>
-              <td>$1200</td>
-            </tr>
-            <tr> */}
               {newHoldings.map((holding, idx) => (
                 <HoldingsRow holding={holding} key={idx} />
               ))}
-            {/* </tr>
-            <tr>
-              <td>GOOG</td>
-              <td>5</td>
-              <td>$4500</td>
-              <td>$4500</td>
-            </tr>
           </tbody>
-        </table> */}
+        </table>
       </div>
     </>
   );
