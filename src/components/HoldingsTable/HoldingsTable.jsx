@@ -31,7 +31,7 @@ export default function HoldingsTable({ transactions, holdings }) {
               <th>Ticker</th>
               <th>Shares</th>
               <th>Current Price</th>
-              <th>$USD</th>
+              <th>Equity</th>
             </tr>
           </thead>
           <tbody>

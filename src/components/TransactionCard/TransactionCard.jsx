@@ -37,9 +37,9 @@ export default function TransactionCard({ transaction }) {
               <div className="ticker-card-text">{transaction.shares.toFixed(2)}</div>
               <div className="ticker-card-price">
                 {transaction.transactionType === "-1" ? (
-                  <div>+${transaction.dollars.toFixed(2)}</div>
-                ) : (
                   <div>-${transaction.dollars.toFixed(2)}</div>
+                ) : (
+                  <div>+${transaction.dollars.toFixed(2)}</div>
                 )}
               </div>
             </div>
@@ -63,9 +63,9 @@ export default function TransactionCard({ transaction }) {
             </div>
             <div className="ticker-card-price-preview">
               {transaction.transactionType === "-1"  ? (
-                <div>-${transaction.dollars.toFixed(2)}</div>
-              ) : (
                 <div>+${transaction.dollars.toFixed(2)}</div>
+              ) : (
+                <div>-${transaction.dollars.toFixed(2)}</div>
               )}
             </div>
           </div>

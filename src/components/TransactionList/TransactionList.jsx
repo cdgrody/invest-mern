@@ -11,7 +11,6 @@ export default function TransactionList({ user, transactions }) {
   useEffect(() => {
     async function updateTransactionList() {
       const transactionList = await getTransactions();
-      console.log(transactionList)
       setTransactionList(transactionList);
     }
     updateTransactionList();
