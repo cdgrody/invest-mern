@@ -104,61 +104,44 @@ export async function getCryptoHistoricalData(symbol) {
   }
 }
 
-
-
 export async function computeUserPerformance(holdings) {
   const performanceData = [
-    {time: 0, dollars: 0},
-    {time: 1, dollars: 0},
-    {time: 2, dollars: 0},
-    {time: 3, dollars: 0},
-    {time: 4, dollars: 0},
-    {time: 5, dollars: 0},
-    {time: 6, dollars: 0},
-    {time: 7, dollars: 0},
-    {time: 8, dollars: 0},
-    {time: 9, dollars: 0},
-    {time: 10, dollars: 0},
-    {time: 11, dollars: 0},
-    {time: 12, dollars: 0},
-    {time: 13, dollars: 0},
-    {time: 14, dollars: 0},
-    {time: 15, dollars: 0},
-    {time: 16, dollars: 0},
-    {time: 17, dollars: 0},
-    {time: 18, dollars: 0},
-    {time: 19, dollars: 0},
-    {time: 20, dollars: 0},
-    {time: 21, dollars: 0},
-    {time: 22, dollars: 0},
-    {time: 23, dollars: 0},
-    {time: 24, dollars: 0},
+    { time: 0, dollars: 0 },
+    { time: 1, dollars: 0 },
+    { time: 2, dollars: 0 },
+    { time: 3, dollars: 0 },
+    { time: 4, dollars: 0 },
+    { time: 5, dollars: 0 },
+    { time: 6, dollars: 0 },
+    { time: 7, dollars: 0 },
+    { time: 8, dollars: 0 },
+    { time: 9, dollars: 0 },
+    { time: 10, dollars: 0 },
+    { time: 11, dollars: 0 },
+    { time: 12, dollars: 0 },
+    { time: 13, dollars: 0 },
+    { time: 14, dollars: 0 },
+    { time: 15, dollars: 0 },
+    { time: 16, dollars: 0 },
+    { time: 17, dollars: 0 },
+    { time: 18, dollars: 0 },
+    { time: 19, dollars: 0 },
+    { time: 20, dollars: 0 },
+    { time: 21, dollars: 0 },
+    { time: 22, dollars: 0 },
+    { time: 23, dollars: 0 },
+    { time: 24, dollars: 0 },
   ];
-    const newPerformanceData = performanceData;
-    console.log('beginning', newPerformanceData)
+  const playHoldings = holdings;
+  const newPerformanceData = performanceData;
   for (let holding of holdings) {
     const holdingHistory = await getCryptoHistoricalData(holding.asset.key);
-    // const newHoldingHistory = holdingHistory.map((hhp, idx) => [
-    //   idx,
-    //   holding.shares * hhp[1],
-    // ]);
-    // console.log('this is our coin', holding.asset.ticker)
     for (let hh of holdingHistory) {
-      let idx = holdingHistory.indexOf(hh)
-      // console.log('before',holding.asset.ticker, holding.shares * hh[1], performanceData[idx].dollars)
-      newPerformanceData[idx].dollars += holding.shares * hh[1]
-      // console.log('after',holding.asset.ticker, holding.shares * hh[1], performanceData[idx].dollars)
+      let idx = holdingHistory.indexOf(hh);
+      newPerformanceData[idx].dollars += holding.shares * hh[1];
     }
-    // holding.historicalPerformance = newHoldingHistory;
   }
-  console.log(newPerformanceData);
-  const bitcoinHistory = await getCryptoHistoricalData(holdings[0].asset.key);
-  // console.log('before', bitcoinHistory[0])
-  let newBitcoins = bitcoinHistory.map((bitcoin, idx) => [
-    idx,
-    holdings[0].shares * bitcoin[1],
-  ]);
-  // console.log('after',newBitcoins)
+  return newPerformanceData;
 }
 
 //retrieved api at https://www.coingecko.com/en/api/documentation
