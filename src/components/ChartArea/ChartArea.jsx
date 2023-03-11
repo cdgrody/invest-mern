@@ -53,5 +53,6 @@ export default function ChartArea({holdings, userBalances, user}) {
         <Line type="monotone" dataKey="dollars" stroke="gold" activeDot={{ r: 8 }} />
       </LineChart>
     </ResponsiveContainer>
+    
   );
 }
