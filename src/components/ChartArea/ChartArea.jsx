@@ -41,7 +41,7 @@ export default function ChartArea({holdings, userBalances, user}) {
       >
         {/* <CartesianGrid strokeDasharray="3 3" /> */}
         <XAxis dataKey="time" />
-        <YAxis domain={[600, 1000]}/>
+        <YAxis domain={[894, 903]}/>
         <Tooltip contentStyle={{ color: 'black' }} wrapperStyle={{ backgroundColor: 'red' }}/>
         {/* <Legend /> */}
         <Line type="monotone" dataKey="dollars" stroke="gold" activeDot={{ r: 8 }} />

@@ -21,7 +21,7 @@ const assetList = [
 async function create(req, res) {
     try {
         req.body.asset = assetList[req.body.asset]
-        const checkHolding = await Holding.find( {asset: req.body.asset} );
+        const checkHolding = await Holding.find( {asset: req.body.asset, user: req.user } );
         if(checkHolding.length === 1) {
             const holding = checkHolding[0];
             res.json(holding)
