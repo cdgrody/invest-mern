@@ -54,7 +54,6 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
     }
     if(newTransaction.asset <= 4) fetchStockData()
     if(newTransaction.asset > 4 && newTransaction.asset !== 10) fetchCryptoData()
-    setUserBalance(user)
   }, [newTransaction.asset])
 
   useEffect(() => {
