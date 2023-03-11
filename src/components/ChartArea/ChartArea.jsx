@@ -6,6 +6,8 @@ import { getUserBalances } from '../../utilities/userBalances-api';
 export default function ChartArea({holdings, userBalances, user}) {
 
   const [data, setData] = useState([])
+  const [minDollarValue, setMinDollarValue] = useState(1000)
+  const [maxDollarValue, setMaxDollarValue] = useState(1000)
   const [newUserBalance, setNewUserBalance] = useState(userBalances)
 
 
@@ -13,6 +15,10 @@ export default function ChartArea({holdings, userBalances, user}) {
     async function collectData(){
       const holdingsIterable = Array.from(holdings);
       const data = await computeUserPerformance(holdingsIterable, userBalances)
+      const minDollarValue = Math.min(...data.map(item => item.dollars));
+      const maxDollarValue = Math.max(...data.map(item => item.dollars));
+      setMinDollarValue(minDollarValue.toFixed(0))
+      setMaxDollarValue(maxDollarValue.toFixed(0))
       setData(data)
     }
     collectData()
@@ -41,7 +47,7 @@ export default function ChartArea({holdings, userBalances, user}) {
       >
         {/* <CartesianGrid strokeDasharray="3 3" /> */}
         <XAxis dataKey="time" />
-        <YAxis domain={[894, 903]}/>
+        <YAxis domain={[parseInt(minDollarValue)-2, parseInt(maxDollarValue)+2]}/>
         <Tooltip contentStyle={{ color: 'black' }} wrapperStyle={{ backgroundColor: 'red' }}/>
         {/* <Legend /> */}
         <Line type="monotone" dataKey="dollars" stroke="gold" activeDot={{ r: 8 }} />
