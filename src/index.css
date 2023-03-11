@@ -10,8 +10,9 @@
   --orange: rgba(238, 207, 58, 1);
   --text-light: #FFFFFF;
   --text-dark: #615954;
-  width: 80vw;
-  margin: 0 9vw 0 9vw;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
 }
 
 *, *:before, *:after {

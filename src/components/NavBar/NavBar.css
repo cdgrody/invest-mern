@@ -1,15 +1,28 @@
 nav {
-    text-align: left;
-    color: white;
-    height: 8%;
-    padding-left: 2vmin;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+    background: rgba(238, 207, 58, 1);
+    height: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .welcome {
-    color: white;
     font-size: 28px;
+    font-weight: 500;
 }
 
 .logout {
-    color:white;
+    font-weight: 500;
+}
+
+nav > * {
+    width: 33%;
+}
+
+.website-title {
+    font-size: 28px;
+    font-weight: 500;
 }
