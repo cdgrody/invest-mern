@@ -1,8 +1,9 @@
 .transaction-card-detail {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    padding: 4px;
+    justify-content: space-between;
+    padding: 4px 5% 4px 5%;
     width: 60%;
     color: rgba(28, 31, 39, 1);
     border: solid rgba(28, 31, 39, 1);
@@ -11,10 +12,25 @@
     cursor: pointer;
 }
 
+.transaction-detail-left {
+    text-align: left;
+}
+
+.transaction-detail-right {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    height: 95%;
+}
+
+.transaction-date {
+    justify-self: flex-end;
+}
+
 .transaction-card-preview {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 4px 0px 4px 0px;
     width: 50%;
     color: rgba(238, 207, 58, 1);
@@ -31,7 +47,7 @@ hr {
 }
 
 #detail-view {
-    background-color: rgba(238, 207, 58, 1);;
+    background-color: rgba(238, 207, 58, 1);
     color: rgba(28, 31, 39, 1);
     font-weight: bolder;
 }
@@ -60,8 +76,11 @@ hr {
 .ticker-card-price {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    font-size: 24px;
+    font-size: 14px;
+}
+
+.transaction-date{
+    font-size: 10px;
 }
 
 .ticker-card-price-preview {

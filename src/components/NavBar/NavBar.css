@@ -1,15 +1,54 @@
 nav {
-    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: white;
-    height: 8%;
-    padding-left: 2vmin;
-}
-
-.welcome {
+    background: rgba(238, 207, 58, 1);
+    height: 64px;
+    padding-left: 16px;
+    padding-right: 16px;
+    }
+    
+    .left-nav {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    }
+    
+    .right-nav {
+    display: flex;
+    align-items: center;
+    }
+    
+    .website-title {
+    text-decoration: none;
     color: white;
-    font-size: 28px;
-}
+    }
+    
+    .welcome {
+    margin-right: 16px;
+    font-size: 20px;
+    font-weight: 500;
+    }
+    
+    .logout,
+    .login {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 16px;
+    }
+    
+    .logout:hover,
+    .login:hover {
+    text-decoration: underline;
+    }
 
-.logout {
-    color:white;
-}
+    .website-title span {
+        color: #3548b4; /* example of a blue color */
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 8px;
+        }

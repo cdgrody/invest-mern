@@ -32,21 +32,25 @@ export default function TransactionCard({ transaction }) {
             onClick={handleClick}
             value={transaction}
           >
-            <div className="ticker-date-ctr">
+            <div className="transaction-detail-left">
               <div className="ticker-card-text">{transaction.asset.ticker}</div>
+              <div className="ticker-card-shares">
+                {transaction.shares.toFixed(2)} Qty
+              </div>
               <div className="ticker-card-price">
-                {transaction.transactionType ? (
-                  <div>+${transaction.dollars.toFixed(2)}</div>
-                ) : (
+                {transaction.transactionType === "-1" ? (
                   <div>-${transaction.dollars.toFixed(2)}</div>
+                ) : (
+                  <div>+${transaction.dollars.toFixed(2)}</div>
                 )}
               </div>
             </div>
-            <div>
-              {dateFormat()[0]} @ {dateFormat()[1]}
+            <div className="transaction-detail-left">
+              <div className="transaction-comment">"{transaction.comment}"</div>
+              <div className="transaction-date">
+                {dateFormat()[0]} @{dateFormat()[1]}
+              </div>
             </div>
-            <div>---------</div>
-            <div>"{transaction.comment}"</div>
           </div>
         </>
       ) : (
@@ -61,7 +65,7 @@ export default function TransactionCard({ transaction }) {
               {transaction.asset.ticker}
             </div>
             <div className="ticker-card-price-preview">
-              {transaction.transactionType ? (
+              {transaction.transactionType === "-1" ? (
                 <div>+${transaction.dollars.toFixed(2)}</div>
               ) : (
                 <div>-${transaction.dollars.toFixed(2)}</div>

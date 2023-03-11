@@ -1,17 +1,61 @@
 .list-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    font-size: 24px;
-    color: rgba(238, 207, 58, 1);
-    font-weight: bold;
-    margin-bottom: 2vh;
-    width: 80%;
-    margin: 0 10% 10% 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 24px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 80%;
+  margin: 0 10% 1.5vh 10%;
+}
+
+.list-header-el:hover {
+  color: rgba(238, 207, 58, 0.5);
 }
 
 .transaction-list-ctr {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#show-option {
+  color: rgba(238, 207, 58, 1);
+}
+
+.holdings-table-area table {
+  border-collapse: collapse;
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.holdings-table-area th {
+  background-color: rgba(238, 207, 58, 1);
+  color: black;
+  font-weight: bold;
+  padding: 10px;
+  text-align: left;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.holdings-table-area td {
+  /* background-color: rgba(255, 255, 255, 0.562); */
+  color: rgba(238, 207, 58, 1);
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.holdings-table-area tbody tr:nth-child(even) {
+  background-color: rgba(238, 207, 58, 0.2);
+  color: rgba(238, 207, 58, 1);
+}
+
+.holdings-table-area tbody tr:nth-child(odd) {
+  color: white;
+}
+
+.holdings-table-area tbody tr:hover {
+  background-color: rgba(242, 236, 205, 0.5);
 }

@@ -1,70 +1,58 @@
-import "./ChartArea.css";
+import {React, useState, useEffect} from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { computeUserPerformance } from '../../utilities/crypto-api';
+import { getUserBalances } from '../../utilities/userBalances-api';
 
-import {
-  LineChart,
-  ResponsiveContainer,
-  Legend,
-  Tooltip,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-} from "recharts";
+export default function ChartArea({holdings, userBalances, user}) {
 
-// Sample chart data
-const pdata = [
-  {
-    name: "MongoDb",
-    student: 11,
-    fees: 120,
-  },
-  {
-    name: "Javascript",
-    student: 15,
-    fees: 12,
-  },
-  {
-    name: "PHP",
-    student: 5,
-    fees: 10,
-  },
-  {
-    name: "Java",
-    student: 10,
-    fees: 5,
-  },
-  {
-    name: "C#",
-    student: 9,
-    fees: 4,
-  },
-  {
-    name: "C++",
-    student: 10,
-    fees: 8,
-  },
-];
+  const [data, setData] = useState([])
+  const [minDollarValue, setMinDollarValue] = useState(1000)
+  const [maxDollarValue, setMaxDollarValue] = useState(1000)
+  const [newUserBalance, setNewUserBalance] = useState(userBalances)
 
-const data = [{ name: "Page A", uv: 400, pv: 2400, amt: 2400 }, { name: "Page B", uv: 40, pv: 240, amt: 240 }];
 
-// const renderLineChart = (
-//   <LineChart width={400} height={400} data={data}>
-//     <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-//   </LineChart>
-// );
+  useEffect(() => {
+    async function collectData(){
+      const holdingsIterable = Array.from(holdings);
+      const data = await computeUserPerformance(holdingsIterable, userBalances)
+      const minDollarValue = Math.min(...data.map(item => item.dollars));
+      const maxDollarValue = Math.max(...data.map(item => item.dollars));
+      setMinDollarValue(minDollarValue.toFixed(0))
+      setMaxDollarValue(maxDollarValue.toFixed(0))
+      setData(data)
+    }
+    collectData()
+  }, [holdings])
 
-export default function App() {
+  useEffect(() => {
+    async function updateUserBalances() {
+      const balances = await getUserBalances(user._id);
+      setNewUserBalance(balances);
+    }
+    updateUserBalances();
+  }, [user._id]);
+
   return (
-    <ResponsiveContainer id="chart-container" width="50%" height="50%" aspect={4}>
-      <LineChart data={pdata}  x={40} y={100}>
-        {/* <CartesianGrid /> */}
-        <XAxis dataKey="name" interval={"preserveStartEnd"} />
-        <YAxis></YAxis>
+    <ResponsiveContainer width="80%" height="100%">
+      <LineChart
+        width={500}
+        height={300}
+        data={data}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        {/* <CartesianGrid strokeDasharray="3 3" /> */}
+        <XAxis dataKey="time" />
+        <YAxis domain={[parseInt(minDollarValue)-2, parseInt(maxDollarValue)+2]}/>
+        <Tooltip contentStyle={{ color: 'black' }} wrapperStyle={{ backgroundColor: 'red' }}/>
         {/* <Legend /> */}
-        <Tooltip />
-        <Line dataKey="student" stroke="yellow" activeDot={{ r: 8 }} />
-        <Line dataKey="fees" stroke="red" activeDot={{ r: 8 }} />
+        <Line type="monotone" dataKey="dollars" stroke="gold" activeDot={{ r: 8 }} />
       </LineChart>
     </ResponsiveContainer>
+    
   );
 }

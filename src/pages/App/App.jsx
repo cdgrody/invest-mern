@@ -3,40 +3,46 @@ import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import { getTransactions } from "../../utilities/transactions-api";
+import { getUserBalances } from "../../utilities/userBalances-api"
 import AuthPage from "../AuthPage/AuthPage";
 import OverviewPage from "../OverviewPage/OverviewPage";
 import NavBar from "../../components/NavBar/NavBar";
+import { getHoldings } from "../../utilities/holdings-api";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [transactions, setTransactions] = useState([]);
-  const [holdings, setHoldings] = useState([])
+  const [userBalances, setUserBalances] = useState(getUserBalances());
+  const [holdings, setHoldings] = useState(getHoldings());
 
   useEffect(() => {
     async function fetchTransactions() {
       const transactions = await getTransactions();
       setTransactions(transactions);
     }
-    const storedUser = localStorage.getItem('user');
-    // if (storedUser) setUser(JSON.parse(storedUser))
-    // async function fetchUser() {
-      // const userData = await getUser();
-      // // console.log('userData from app.jsx end', user)
-      // setUser(userData);
-    // }
+    async function fetchUser() {
+      const user = await getUser();
+      setUser(user);
+    }
+    async function fetchUserBalances() {
+      const userBalances = await getUserBalances();
+      setUserBalances(userBalances);
+    }
+    async function fetchUpdatedHoldings() {
+      const holdings = await getHoldings();
+      setHoldings(holdings);
+    }
     if (user) {
-      // fetchUser();
       fetchTransactions()
+      fetchUserBalances()
+      fetchUpdatedHoldings()
     };
   }, [user]);
 
-  console.log('user in the app.jsx', user)
-
-  async function handleTransactionAdded(newTransaction, addUpdatedUser) {
+  async function handleTransactionAdded(newTransaction, addUpdatedUserBalances) {
     const newTransactions = [...transactions, newTransaction];
     setTransactions(newTransactions);
-    setUser(addUpdatedUser);
-    // localStorage.setItem('user', JSON.stringify(addUpdatedUser));
+    setUserBalances(addUpdatedUserBalances)
   }
 
   return (
@@ -52,8 +58,8 @@ export default function App() {
                   user={user}
                   handleTransactionAdded={handleTransactionAdded}
                   transactions={transactions}
+                  userBalances={userBalances}
                   holdings={holdings}
-                  setUser={user}
                 />
               }
             />

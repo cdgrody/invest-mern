@@ -3,11 +3,10 @@ const bcrypt = require("bcrypt");
 const User = require("../../models/user");
 
 module.exports = {
-  create,
-  login,
-  checkToken,
-  update,
-};
+    create,
+    login,
+    checkToken,
+}
 
 async function create(req, res) {
   try {
@@ -37,21 +36,6 @@ function checkToken(req, res) {
   res.json(req.exp);
 }
 
-async function update(req, res) {
-  console.log("update user function ---------");
-  try {
-    const user = await User.findById(req.user._id);
-    // const newBalance = user.balance - 10;
-    console.log(user);
-    const newBalance = req.body.balance;
-    user.balance = newBalance;
-    await user.updateOne({ balance: newBalance });
-    console.log(user);
-    res.json(user);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-}
 
 /*-- Helper Functions --*/
 

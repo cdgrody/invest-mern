@@ -1,15 +1,26 @@
-import './HoldingsTable.css'
+import "./HoldingsTable.css";
+import { useState, useEffect } from "react";
+import { getHoldings } from "../../utilities/holdings-api";
+import { getTransactions } from "../../utilities/transactions-api";
+import HoldingsRow from "../HoldingsRow/HoldingsRow";
 
-export default function HoldingsTable({ transactions }) {
+export default function HoldingsTable({ transactions, holdings }) {
+  const [newHoldings, setNewHoldings] = useState([]);
+  const [transactionList, setTransactionList] = useState(getTransactions);
 
-    // const holdingsTickers = []
-    // // const holdings = [{'ticker': 'BTC', 'shares': 3, 'price': 400}]
-    // function createHoldings() {
-    //     for (transaction in transactions) {
-    //         if (!(transaction.asset.ticker in holdingsTickers)) holdingsTickers.push(transaction.asset.ticker)
-    //     }
-    //     console.log(holdingsTickers)
-    // }
+  useEffect(() => {
+    async function updateTransactionList() {
+      const transactionList = await getTransactions();
+      setTransactionList(transactionList);
+    }
+    async function updateHoldingsTable() {
+      const newHoldings = await getHoldings();
+      setNewHoldings(newHoldings);
+    }
+    updateTransactionList();
+    updateHoldingsTable();
+  }, []);
+
 
   return (
     <>
@@ -20,22 +31,13 @@ export default function HoldingsTable({ transactions }) {
               <th>Ticker</th>
               <th>Shares</th>
               <th>Current Price</th>
-              <th>$USD</th>
+              <th>Equity</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>AAPL</td>
-              <td>10</td>
-              <td>$1200</td>
-              <td>$1200</td>
-            </tr>
-            <tr>
-              <td>GOOG</td>
-              <td>5</td>
-              <td>$4500</td>
-              <td>$4500</td>
-            </tr>
+              {newHoldings.map((holding, idx) => (
+                <HoldingsRow holding={holding} key={idx} />
+              ))}
           </tbody>
         </table>
       </div>

@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { signUp } from '../../utilities/users-service'
+import { createBalance } from '../../utilities/userBalances-api'
 
 export default class SignUpForm extends Component {
   state = {
@@ -27,6 +28,7 @@ export default class SignUpForm extends Component {
         }
         const user = await signUp(formData)
         this.props.setUser(user)
+        await createBalance({balance: 1000})
       } catch {
         this.setState({ error: 'Sign Up Failed - Try Again' })
       }
