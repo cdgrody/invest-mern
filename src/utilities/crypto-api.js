@@ -104,44 +104,49 @@ export async function getCryptoHistoricalData(symbol) {
   }
 }
 
-export async function computeUserPerformance(holdings) {
+export async function computeUserPerformance(holdings, userBalances) {
   const performanceData = [
-    { time: 0, dollars: 0 },
-    { time: 1, dollars: 0 },
-    { time: 2, dollars: 0 },
-    { time: 3, dollars: 0 },
-    { time: 4, dollars: 0 },
-    { time: 5, dollars: 0 },
-    { time: 6, dollars: 0 },
-    { time: 7, dollars: 0 },
-    { time: 8, dollars: 0 },
-    { time: 9, dollars: 0 },
-    { time: 10, dollars: 0 },
-    { time: 11, dollars: 0 },
-    { time: 12, dollars: 0 },
-    { time: 13, dollars: 0 },
-    { time: 14, dollars: 0 },
-    { time: 15, dollars: 0 },
-    { time: 16, dollars: 0 },
-    { time: 17, dollars: 0 },
-    { time: 18, dollars: 0 },
-    { time: 19, dollars: 0 },
-    { time: 20, dollars: 0 },
-    { time: 21, dollars: 0 },
-    { time: 22, dollars: 0 },
-    { time: 23, dollars: 0 },
-    { time: 24, dollars: 0 },
+    { time: 0, dollars: userBalances.balance },
+    { time: 1, dollars: userBalances.balance },
+    { time: 2, dollars: userBalances.balance },
+    { time: 3, dollars: userBalances.balance },
+    { time: 4, dollars: userBalances.balance },
+    { time: 5, dollars: userBalances.balance },
+    { time: 6, dollars: userBalances.balance },
+    { time: 7, dollars: userBalances.balance },
+    { time: 8, dollars: userBalances.balance },
+    { time: 9, dollars: userBalances.balance },
+    { time: 10, dollars: userBalances.balance },
+    { time: 11, dollars: userBalances.balance },
+    { time: 12, dollars: userBalances.balance },
+    { time: 13, dollars: userBalances.balance },
+    { time: 14, dollars: userBalances.balance },
+    { time: 15, dollars: userBalances.balance },
+    { time: 16, dollars: userBalances.balance },
+    { time: 17, dollars: userBalances.balance },
+    { time: 18, dollars: userBalances.balance },
+    { time: 19, dollars: userBalances.balance },
+    { time: 20, dollars: userBalances.balance },
+    { time: 21, dollars: userBalances.balance },
+    { time: 22, dollars: userBalances.balance },
+    { time: 23, dollars: userBalances.balance },
+    { time: 24, dollars: userBalances.balance },
   ];
-  const playHoldings = holdings;
   const newPerformanceData = performanceData;
+  const minDollar = newPerformanceData[0].dollars;
+  const maxDollar = newPerformanceData[0].dollars;
   for (let holding of holdings) {
+    // let holdingIdx = holdings.indexOf(holding)
     const holdingHistory = await getCryptoHistoricalData(holding.asset.key);
     for (let hh of holdingHistory) {
       let idx = holdingHistory.indexOf(hh);
-      newPerformanceData[idx].dollars += holding.shares * hh[1];
+        newPerformanceData[idx].dollars += holding.shares * hh[1];
+      // if(newPerformanceData[idx].dollars > maxDollar) maxDollar = newPerformanceData[idx].dollars
+      // if(newPerformanceData[idx].dollars < minDollar) minDollar = newPerformanceData[idx].dollars
     }
   }
-  return newPerformanceData;
+  // return [newPerformanceData, minDollar, maxDollar];
+  return newPerformanceData
 }
 
 //retrieved api at https://www.coingecko.com/en/api/documentation
