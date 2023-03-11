@@ -5,6 +5,7 @@ const holdingSchema = new Schema(
   {
     asset: { type: Object, required: true },
     shares: { type: Number, required: true },
+    historicalPerformance: {type: Array, required: true, default: []},
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",

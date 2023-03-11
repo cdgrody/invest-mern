@@ -2,27 +2,53 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: black;
+    color: white;
     background: rgba(238, 207, 58, 1);
-    height: 5%;
-    padding-left: 10%;
-    padding-right: 10%;
-}
-
-.welcome {
-    font-size: 28px;
+    height: 64px;
+    padding-left: 16px;
+    padding-right: 16px;
+    }
+    
+    .left-nav {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    }
+    
+    .right-nav {
+    display: flex;
+    align-items: center;
+    }
+    
+    .website-title {
+    text-decoration: none;
+    color: white;
+    }
+    
+    .welcome {
+    margin-right: 16px;
+    font-size: 20px;
     font-weight: 500;
-}
+    }
+    
+    .logout,
+    .login {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 16px;
+    }
+    
+    .logout:hover,
+    .login:hover {
+    text-decoration: underline;
+    }
 
-.logout {
-    font-weight: 500;
-}
-
-nav > * {
-    width: 33%;
-}
-
-.website-title {
-    font-size: 28px;
-    font-weight: 500;
-}
+    .website-title span {
+        color: #3548b4; /* example of a blue color */
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 8px;
+        }
