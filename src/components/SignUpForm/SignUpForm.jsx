@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import { signUp } from '../../utilities/users-service'
 import { createBalance } from '../../utilities/userBalances-api'
+import './SignUpForm.css'
 
 export default class SignUpForm extends Component {
   state = {
