@@ -2,6 +2,7 @@ import {React, useState, useEffect} from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { computeUserPerformance } from '../../utilities/crypto-api';
 import { getUserBalances } from '../../utilities/userBalances-api';
+import './ChartArea.css'
 
 export default function ChartArea({holdings, userBalances, user}) {
 
@@ -36,15 +37,13 @@ export default function ChartArea({holdings, userBalances, user}) {
     updateUserBalances();
   }, [user._id]);
 
-  function calculatePercentageChange() {
-    if(percentChange >= 0) return 'positive-percent' 
-    return 'negative-percent'
-  }
 
   return (
     <>
+    <div className='chart-title-info'>
     <h1>${userNetWorth}</h1>
-    <h2 className={calculatePercentageChange}>{percentChange >= 0 ? `⬆${percentChange}` : `⬇${percentChange}`}</h2>
+    <h2 className={percentChange >= 0 ? `positive-percent` : `negative-percent`}>{percentChange >= 0 ? `⬆ %${percentChange}` : `⬇ %${percentChange * -1}`}</h2>
+    </div>
     <ResponsiveContainer width="80%" height="100%">
       <LineChart
         width={500}

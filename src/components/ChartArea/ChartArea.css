@@ -1,23 +1,19 @@
-svg {
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-    height: 100%;
-    width: 180%;
+.chart-title-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: rgba(238, 207, 58, 1);
 }
 
-.recharts-wrapper {
-    width: 20%;
+.chart-title-info > * {
+    text-align: right;
+  margin: 0.1vh;
 }
 
-#chart-container {
-    width: 50%;
+.positive-percent {
+  color: green;
 }
 
-.chart-ctr {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width:100%;
-    height: 100%;
+.negative-percent {
+  color: red;
 }

@@ -136,19 +136,14 @@ export async function computeUserPerformance(holdings, userBalances) {
   const minDollar = newPerformanceData[0].dollars;
   const maxDollar = newPerformanceData[0].dollars;
   for (let holding of holdings) {
-    // let holdingIdx = holdings.indexOf(holding)
     const holdingHistory = await getCryptoHistoricalData(holding.asset.key);
     for (let hh of holdingHistory) {
       let idx = holdingHistory.indexOf(hh);
         newPerformanceData[idx].dollars += holding.shares * hh[1];
-      // if(newPerformanceData[idx].dollars > maxDollar) maxDollar = newPerformanceData[idx].dollars
-      // if(newPerformanceData[idx].dollars < minDollar) minDollar = newPerformanceData[idx].dollars
     }
   }
-  // return [newPerformanceData, minDollar, maxDollar];
   return newPerformanceData
 }
 
 //retrieved api at https://www.coingecko.com/en/api/documentation
 
-// return holdings.map(holding => ({ time: holding.time, dollars: holding.quantity * await getCryptoData(holding.ticker) }))
