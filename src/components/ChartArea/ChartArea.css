@@ -17,3 +17,7 @@
 .negative-percent {
   color: red;
 }
+
+.custom-tooltip {
+    color: rgba(238, 207, 58, 1);
+}

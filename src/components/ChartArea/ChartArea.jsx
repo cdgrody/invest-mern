@@ -37,6 +37,18 @@ export default function ChartArea({holdings, userBalances, user}) {
     updateUserBalances();
   }, [user._id]);
 
+  function CustomTooltip({ payload, label, active }) {
+    if (active) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`${24 - label === 0 ? 'Now' : `${24 - label} hours ago`}`}</p>
+          <p className="label">${payload[0].value.toFixed(2)}</p>
+        </div>
+      );
+    }
+  
+    return null;
+  }
 
   return (
     <>
@@ -57,9 +69,9 @@ export default function ChartArea({holdings, userBalances, user}) {
         }}
       >
         {/* <CartesianGrid strokeDasharray="3 3" /> */}
-        <XAxis dataKey="time" />
+        <XAxis dataKey="time"/>
         <YAxis domain={[parseInt(minDollarValue)-2, parseInt(maxDollarValue)+2]}/>
-        <Tooltip contentStyle={{ color: 'black' }} wrapperStyle={{ backgroundColor: 'red' }}/>
+        <Tooltip content={<CustomTooltip />} />
         {/* <Legend /> */}
         <Line type="monotone" dataKey="dollars" stroke="gold" activeDot={{ r: 8 }} />
       </LineChart>
