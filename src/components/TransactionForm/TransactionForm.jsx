@@ -81,7 +81,7 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
   }, [handleTransactionAdded]);
 
   async function changeUniversalMultiplier(evt) {
-    setUniversalMultiplier(-1*universalMultiplier)
+    setUniversalMultiplier(-1*parseInt(evt.target.value))
     handleChange(evt)
   }
 
@@ -136,6 +136,7 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
       shares: 0,
       user: user,
     });
+    setUniversalMultiplier(1)
     return await handleTransactionAdded(addedTransaction, addUpdatedUserBalances, addedHolding)
   }
 

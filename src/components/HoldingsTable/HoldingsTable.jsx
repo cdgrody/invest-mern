@@ -19,7 +19,7 @@ export default function HoldingsTable({ transactions, holdings }) {
     }
     updateTransactionList();
     updateHoldingsTable();
-  }, []);
+  }, [transactions]);
 
 
   return (
