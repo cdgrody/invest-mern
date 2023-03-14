@@ -3,6 +3,7 @@ import "./OverviewPage.css";
 import TransactionForm from "../../components/TransactionForm/TransactionForm";
 import TransactionList from "../../components/TransactionList/TransactionList";
 import ChartArea from "../../components/ChartArea/ChartArea";
+import NewsArticles from "../../components/NewsArticles/NewsArticles"
 
 export default function OverviewPage({
   user,
@@ -10,6 +11,7 @@ export default function OverviewPage({
   handleTransactionAdded,
   userBalances,
   holdings,
+  newsArticles,
 }) {
   const [showTransactionForm, setShowTransactionForm] = useState(true);
   const [showNews, setShowNews] = useState(true);
@@ -59,19 +61,6 @@ export default function OverviewPage({
               </div>
             </>
           )}
-          {showNews ? (
-            <>
-              <div className="news-preview" onClick={handleShowNews}>
-                Show Crypto News ▶
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="news-preview" onClick={handleShowNews}>
-                Show Crypto News ▼
-              </div>
-            </>
-          )}
           {showAI ? (
             <>
               <div
@@ -89,6 +78,20 @@ export default function OverviewPage({
               >
                 AI Investing Advice ▼
               </div>
+            </>
+          )}
+          {showNews ? (
+            <>
+              <div className="news-preview" onClick={handleShowNews}>
+                Show Crypto News ▶
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="news-preview" onClick={handleShowNews}>
+                Show Crypto News ▼
+              </div>
+              <NewsArticles newsArticles={newsArticles}/>
             </>
           )}
         </div>

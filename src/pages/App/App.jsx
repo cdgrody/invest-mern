@@ -8,10 +8,12 @@ import AuthPage from "../AuthPage/AuthPage";
 import OverviewPage from "../OverviewPage/OverviewPage";
 import NavBar from "../../components/NavBar/NavBar";
 import { getHoldings } from "../../utilities/holdings-api";
+import { getNewsData } from "../../utilities/news-api";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [transactions, setTransactions] = useState([]);
+  const [newsArticles, setNewsArticles] = useState([])
   const [userBalances, setUserBalances] = useState(getUserBalances());
   const [holdings, setHoldings] = useState(getHoldings());
 
@@ -32,10 +34,15 @@ export default function App() {
       const holdings = await getHoldings();
       setHoldings(holdings);
     }
+    async function fetchNewsArticles() {
+      const newsArticles = await getNewsData();
+      setNewsArticles(newsArticles);
+    }
     if (user) {
       fetchTransactions()
       fetchUserBalances()
       fetchUpdatedHoldings()
+      fetchNewsArticles()
     };
   }, [user]);
 
@@ -62,6 +69,7 @@ export default function App() {
                   transactions={transactions}
                   userBalances={userBalances}
                   holdings={holdings}
+                  newsArticles={newsArticles}
                 />
               }
             />
