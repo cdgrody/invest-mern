@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./TransactionForm.css";
 import { addTransaction } from "../../utilities/transactions-api";
-import { manageHolding } from "../../utilities/holdings-api";
+import { getHoldings, manageHolding } from "../../utilities/holdings-api";
 import { updateUserBalances, getUserBalances } from "../../utilities/userBalances-api";
 import { getStockData } from "../../utilities/stock-api";
 import { getCryptoData } from "../../utilities/crypto-api";
@@ -72,7 +72,15 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
     isValid = false
   }
 
-  function changeUniversalMultiplier(evt) {
+  useEffect(() => {
+    async function updateHoldingsTable() {
+      const holdingsTracker = await getHoldings();
+      setHoldingsTracker(holdingsTracker);
+    }
+    updateHoldingsTable();
+  }, [handleTransactionAdded]);
+
+  async function changeUniversalMultiplier(evt) {
     setUniversalMultiplier(-1*universalMultiplier)
     handleChange(evt)
   }
@@ -99,7 +107,9 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    newHolding.shares = universalMultiplier * shareCalculator();
+    const multiplier = await universalMultiplier;
+    newHolding.shares = multiplier * shareCalculator();
+    // newTransaction.transactionType === "-1" ? newHolding.shares = newHolding.shares*1  :  newHolding.shares = -1 * newHolding.shares;
     const addedHolding = await manageHolding(newHolding, holdingsTracker);
     newTransaction.shares = shareCalculator();
     const addedTransaction = await addTransaction(newTransaction);
