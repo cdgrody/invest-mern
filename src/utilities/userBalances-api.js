@@ -11,6 +11,5 @@ export async function getUserBalances() {
 }
 
 export async function updateUserBalances(userBalancesData) {
-    console.log("userBalancesData", userBalancesData._id)
     return sendRequest(`${BASE_URL}/${userBalancesData._id}`, 'PUT', userBalancesData)
 }

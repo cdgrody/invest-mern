@@ -54,6 +54,7 @@ export default function OverviewPage({
                   user={user}
                   handleTransactionAdded={handleTransactionAdded}
                   userBalances={userBalances}
+                  holdings={holdings}
                 />
               </div>
             </>

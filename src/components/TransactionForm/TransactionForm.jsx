@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import "./TransactionForm.css";
 import { addTransaction } from "../../utilities/transactions-api";
-import { addHolding } from "../../utilities/holdings-api";
+import { manageHolding } from "../../utilities/holdings-api";
 import { updateUserBalances, getUserBalances } from "../../utilities/userBalances-api";
 import { getStockData } from "../../utilities/stock-api";
 import { getCryptoData } from "../../utilities/crypto-api";
 
-export default function OverviewPage({ user, handleTransactionAdded, userBalances }) {
+export default function OverviewPage({ user, handleTransactionAdded, userBalances, holdings }) {
 
   const assetList = [
     {key: 0, ticker: 'VOO', fullName: 'Vanguard S&P 500 ETF', type: 'stock', about: 'Vanguard S&P 500 ETF - This fund tracks the performance of the S&P 500 index, which consists of 500 large-cap U.S. stocks.'},
@@ -41,7 +41,10 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
   const [assetPrice, setAssetPrice] = useState(0)
   
   const [newUserBalance, setNewUserBalance] = useState(userBalances)
-  // console.log('print user balance', userBalances)
+
+  const [holdingsTracker, setHoldingsTracker] = useState(holdings)
+
+  const [universalMultiplier, setUniversalMultiplier] = useState(1)
 
   useEffect(() => {
     async function fetchStockData(){
@@ -69,6 +72,11 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
     isValid = false
   }
 
+  function changeUniversalMultiplier(evt) {
+    (evt.target.value === "-1") ? setUniversalMultiplier(1) : setUniversalMultiplier(-1)
+    handleChange(evt)
+  }
+
   function handleChange(evt) {
     const newTransactionData = {
       ...newTransaction,
@@ -77,7 +85,7 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
     };
     const newHoldingData = {
       ...newHolding,
-      shares: shareCalculator(),
+      shares: universalMultiplier * shareCalculator(),
       [evt.target.name]: evt.target.value
     }
     setNewTransaction(newTransactionData);
@@ -93,13 +101,11 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
     evt.preventDefault();
     const newBalance = userBalances.balance + parseInt(newTransaction.transactionType) * newTransaction.dollars
     userBalances.balance = newBalance;
-    setNewUserBalance(userBalances)
     const addUpdatedUserBalances = await updateUserBalances(userBalances)
-    console.log('add updated user >>>>>>>', newBalance)
-    const addedHolding = await addHolding(newHolding);
+    if(newBalance > 0) setNewUserBalance(userBalances)
+    const addedHolding = await manageHolding(newHolding, holdingsTracker);
     newTransaction.holding = addedHolding._id;
     const addedTransaction = await addTransaction(newTransaction);
-
     setNewUserBalance({
       balance: newBalance,
       user: user
@@ -126,7 +132,7 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
     <>
       <div className="transaction-form-ctr">
         <form className="left-area-body" onSubmit={handleSubmit}>
-          <label id="buying-power">Buying Power: ${newUserBalance.balance + parseInt(newTransaction.transactionType) * newTransaction.dollars}</label>
+          <label id="buying-power">Buying Power: ${newTransaction.transactionType === "-1" && newTransaction.dollars > 0 ? newUserBalance.balance + parseInt(newTransaction.transactionType) * newTransaction.dollars : newUserBalance.balance}</label>
           <div className="ticker-ctr">
             <select
               name="asset"
@@ -165,7 +171,7 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
               <option value={true}>Public</option>
               <option value={false}>Private</option>
             </select>
-            <select name="transactionType" onChange={handleChange} value={newTransaction.transactionType} className="transaction-selector">
+            <select name="transactionType" onChange={changeUniversalMultiplier} value={newTransaction.transactionType} className="transaction-selector">
               <option value={"-1"}>Buy</option>
               <option value={"1"}>Sell</option>
             </select>
