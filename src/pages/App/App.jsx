@@ -39,10 +39,12 @@ export default function App() {
     };
   }, [user]);
 
-  async function handleTransactionAdded(newTransaction, addUpdatedUserBalances) {
+  async function handleTransactionAdded(newTransaction, addUpdatedUserBalances, addedHolding) {
     const newTransactions = [...transactions, newTransaction];
     setTransactions(newTransactions);
     setUserBalances(addUpdatedUserBalances)
+    const newHoldings = [...addedHolding]
+    setHoldings(newHoldings)
   }
 
   return (

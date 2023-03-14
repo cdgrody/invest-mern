@@ -73,7 +73,7 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
   }
 
   function changeUniversalMultiplier(evt) {
-    (evt.target.value === "-1") ? setUniversalMultiplier(1) : setUniversalMultiplier(-1)
+    setUniversalMultiplier(-1*universalMultiplier)
     handleChange(evt)
   }
 
@@ -85,7 +85,7 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
     };
     const newHoldingData = {
       ...newHolding,
-      shares: universalMultiplier * shareCalculator(),
+      shares: shareCalculator(),
       [evt.target.name]: evt.target.value
     }
     setNewTransaction(newTransactionData);
@@ -99,12 +99,13 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
 
   async function handleSubmit(evt) {
     evt.preventDefault();
+    newHolding.shares = universalMultiplier * newHolding.shares;
+    const addedHolding = await manageHolding(newHolding, holdingsTracker);
+    newTransaction.holding = addedHolding._id;
     const newBalance = userBalances.balance + parseInt(newTransaction.transactionType) * newTransaction.dollars
     userBalances.balance = newBalance;
     const addUpdatedUserBalances = await updateUserBalances(userBalances)
     if(newBalance > 0) setNewUserBalance(userBalances)
-    const addedHolding = await manageHolding(newHolding, holdingsTracker);
-    newTransaction.holding = addedHolding._id;
     const addedTransaction = await addTransaction(newTransaction);
     setNewUserBalance({
       balance: newBalance,
@@ -125,7 +126,7 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
       shares: 0,
       user: user,
     });
-    return await handleTransactionAdded(addedTransaction, addUpdatedUserBalances)
+    return await handleTransactionAdded(addedTransaction, addUpdatedUserBalances, addedHolding)
   }
 
   return (
