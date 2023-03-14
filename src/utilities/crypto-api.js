@@ -78,20 +78,20 @@ const assetList = [
   },
 ];
 export async function getCryptoData(symbol) {
-  // try {
-    // const response = await fetch(
-    //   `https://api.coingecko.com/api/v3/coins/${assetList[
-    //     symbol
-    //   ].fullName.toLowerCase()}?tickers=true`
-    // );
-    // const data = await response.json();
-    // const price = data["market_data"]["current_price"].usd;
-  //   return price;
-  // } catch (error) {
-  //   console.log(error);
-  //   return generateRandomPrice(symbol);
-  // }
-  return generateRandomPrice(symbol);
+  try {
+    const response = await fetch(
+      `https://api.coingecko.com/api/v3/coins/${assetList[
+        symbol
+      ].fullName.toLowerCase()}?tickers=true`
+    );
+    const data = await response.json();
+    const price = data["market_data"]["current_price"].usd;
+    return price;
+  } catch (error) {
+    console.log(error);
+    return generateRandomPrice(symbol);
+  }
+  // return generateRandomPrice(symbol);
 }
 
 function generateRandomHistoricalPrices(symbol) {
@@ -106,20 +106,24 @@ function generateRandomHistoricalPrices(symbol) {
 }
 
 export async function getCryptoHistoricalData(symbol) {
-  // try {
-    // const response = await fetch(
-    //   `https://api.coingecko.com/api/v3/coins/${assetList[
-    //     symbol
-    //   ].fullName.toLowerCase()}/market_chart?vs_currency=usd&days=1&interval=hourly`
-    // );
-    // const data = await response.json();
-  //   const price = data.prices;
-  //   return price;
-  // } catch (error) {
-  //   console.log(error);
-  //   return generateRandomHistoricalPrices(symbol);
-  // }
-  return generateRandomHistoricalPrices(symbol);
+  if(symbol < 5) {
+    return generateRandomHistoricalPrices(symbol)
+  } else {
+    try {
+    const response = await fetch(
+      `https://api.coingecko.com/api/v3/coins/${assetList[
+        symbol
+      ].fullName.toLowerCase()}/market_chart?vs_currency=usd&days=1&interval=hourly`
+    );
+    const data = await response.json();
+    const price = data.prices;
+    return price;
+  } catch (error) {
+    console.log(error);
+    return generateRandomHistoricalPrices(symbol);
+  }
+}
+  // return generateRandomHistoricalPrices(symbol);
 }
 
 function generateRandomPrice(symbol) {
