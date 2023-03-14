@@ -24,7 +24,7 @@ export default function HoldingsRow({ holding }) {
       <tr>
         <td>{holding.asset.ticker}</td>
         <td>{holding.shares.toFixed(2)}</td>
-        <td>${assetPrice}</td>
+        <td>${assetPrice.toFixed(2)}</td>
         <td>${(assetPrice*holding.shares).toFixed(2)}</td>
       </tr>
     </>

@@ -12,7 +12,7 @@ export default function NavBar({ user, setUser }) {
     <nav>
       <div className="left-nav">
         <Link to="/" className="website-title">
-          Learn, Earn and Invest-MERN <br />
+          Earn, Learn and Invest-MERN <br />
           <span>AI Informed Crypto Trading</span>
         </Link>
       </div>

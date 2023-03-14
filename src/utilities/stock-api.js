@@ -8,6 +8,8 @@ const API_KEY_ARRAY = [
 ];
 let key_picker = 0;
 
+const assetPrices = [358.31, 296.00, 176.49, 68.80, 98.39, 25754.36, 1758.38, .076589, 316.54, .3602] //as of 3/14/23
+
 const assetList = [
   {key: 0, ticker: 'VOO', fullName: 'Vanguard S&P 500 ETF', type: 'stock', about: 'Vanguard S&P 500 ETF - This fund tracks the performance of the S&P 500 index, which consists of 500 large-cap U.S. stocks.'},
   {key: 1, ticker: 'QQQ', fullName: 'Invesco QQQ Trust', type: 'stock', about: 'Invesco QQQ Trust - This fund tracks the performance of the Nasdaq-100 index, which is composed of 100 of the largest domestic and international non-financial companies listed on the Nasdaq Stock Market.'},
@@ -21,19 +23,24 @@ const assetList = [
   {key: 9, ticker: 'ADA', fullName: 'Cardano', type: 'crypto', about: 'a blockchain platform that aims to provide a more secure and sustainable infrastructure for decentralized applications.'},
 ]
 export async function getStockData(symbol) {
-  try {
-    key_picker += 1;
-    key_picker %= 5;
-    const response = await fetch(
-      `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${assetList[symbol].ticker}&apikey=${API_KEY_ARRAY[key_picker]}`
-    );
-    const data = await response.json();
-    const price = data["Global Quote"]["05. price"];
-    return price;
-  } catch (error) {
-    console.log(error);
-    return 0;
-  }
+  // try {
+  //   key_picker += 1;
+  //   key_picker %= 5;
+  //   const response = await fetch(
+  //     `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${assetList[symbol].ticker}&apikey=${API_KEY_ARRAY[key_picker]}`
+  //   );
+  //   const data = await response.json();
+  //   const price = data["Global Quote"]["05. price"];
+  //   return price;
+  // } catch (error) {
+  //   console.log(error);
+  //   return generateRandomPrice(symbol);
+  // }
+  return generateRandomPrice(symbol);
 }
 
+function generateRandomPrice(symbol) {
+  const newPrice = assetPrices[symbol]
+  return newPrice * ((Math.random() * 0.1) + .95)
+}
 //retrieved api key at https://www.alphavantage.co/

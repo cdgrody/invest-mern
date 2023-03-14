@@ -1,5 +1,10 @@
 import { type } from "@testing-library/user-event/dist/type";
 
+const assetPrices = [
+  358.31, 296.0, 176.49, 68.8, 98.39, 25754.36, 1758.38, 0.076589, 316.54,
+  0.3602,
+]; //as of 3/14/23
+
 const assetList = [
   {
     ticker: "VOO",
@@ -73,35 +78,53 @@ const assetList = [
   },
 ];
 export async function getCryptoData(symbol) {
-  try {
-    const response = await fetch(
-      `https://api.coingecko.com/api/v3/coins/${assetList[
-        symbol
-      ].fullName.toLowerCase()}?tickers=true`
-    );
-    const data = await response.json();
-    const price = data["market_data"]["current_price"].usd;
-    return price;
-  } catch (error) {
-    console.log(error);
-    return 0;
+  // try {
+    // const response = await fetch(
+    //   `https://api.coingecko.com/api/v3/coins/${assetList[
+    //     symbol
+    //   ].fullName.toLowerCase()}?tickers=true`
+    // );
+    // const data = await response.json();
+    // const price = data["market_data"]["current_price"].usd;
+  //   return price;
+  // } catch (error) {
+  //   console.log(error);
+  //   return generateRandomPrice(symbol);
+  // }
+  return generateRandomPrice(symbol);
+}
+
+function generateRandomHistoricalPrices(symbol) {
+  const randomHistoricalPrices = [
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  ];
+  for (let randomHistoricalPrice of randomHistoricalPrices) {
+    let idx = randomHistoricalPrices.indexOf(randomHistoricalPrice);
+    randomHistoricalPrices[idx] = [idx, generateRandomPrice(symbol)];
   }
+  return randomHistoricalPrices;
 }
 
 export async function getCryptoHistoricalData(symbol) {
-  try {
-    const response = await fetch(
-      `https://api.coingecko.com/api/v3/coins/${assetList[
-        symbol
-      ].fullName.toLowerCase()}/market_chart?vs_currency=usd&days=1&interval=hourly`
-    );
-    const data = await response.json();
-    const price = data.prices;
-    return price;
-  } catch (error) {
-    console.log(error);
-    return 0;
-  }
+  // try {
+    // const response = await fetch(
+    //   `https://api.coingecko.com/api/v3/coins/${assetList[
+    //     symbol
+    //   ].fullName.toLowerCase()}/market_chart?vs_currency=usd&days=1&interval=hourly`
+    // );
+    // const data = await response.json();
+  //   const price = data.prices;
+  //   return price;
+  // } catch (error) {
+  //   console.log(error);
+  //   return generateRandomHistoricalPrices(symbol);
+  // }
+  return generateRandomHistoricalPrices(symbol);
+}
+
+function generateRandomPrice(symbol) {
+  const newPrice = assetPrices[symbol];
+  return newPrice * (Math.random() * 0.1 + 0.95);
 }
 
 export async function computeUserPerformance(holdings, userBalances) {
@@ -139,11 +162,10 @@ export async function computeUserPerformance(holdings, userBalances) {
     const holdingHistory = await getCryptoHistoricalData(holding.asset.key);
     for (let hh of holdingHistory) {
       let idx = holdingHistory.indexOf(hh);
-        newPerformanceData[idx].dollars += holding.shares * hh[1];
+      newPerformanceData[idx].dollars += holding.shares * hh[1];
     }
   }
-  return newPerformanceData
+  return newPerformanceData;
 }
 
 //retrieved api at https://www.coingecko.com/en/api/documentation
-
