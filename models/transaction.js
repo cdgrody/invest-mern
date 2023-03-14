@@ -7,7 +7,7 @@ const transactionSchema = new Schema(
     transactionType: { type: String, default: "-1" },
     dollars: { type: Number, required: true },
     shares: { type: Number, required: true },
-    comment: { type: String, required: false },
+    comment: { type: String },
     public: { type: Boolean, required: true, default: true },
     user: {
       type: Schema.Types.ObjectId,

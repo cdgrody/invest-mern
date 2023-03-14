@@ -99,8 +99,9 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    newHolding.shares = universalMultiplier * newHolding.shares;
+    newHolding.shares = universalMultiplier * shareCalculator();
     const addedHolding = await manageHolding(newHolding, holdingsTracker);
+    newTransaction.shares = shareCalculator();
     const addedTransaction = await addTransaction(newTransaction);
     const newBalance = userBalances.balance + parseInt(newTransaction.transactionType) * newTransaction.dollars
     userBalances.balance = newBalance;
