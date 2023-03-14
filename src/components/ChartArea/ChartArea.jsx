@@ -4,7 +4,7 @@ import { computeUserPerformance } from '../../utilities/crypto-api';
 import { getUserBalances } from '../../utilities/userBalances-api';
 import './ChartArea.css'
 
-export default function ChartArea({holdings, userBalances, user}) {
+export default function ChartArea({holdings, userBalances, user, transactions}) {
 
   const [data, setData] = useState([])
   const [minDollarValue, setMinDollarValue] = useState(1000)
@@ -27,7 +27,7 @@ export default function ChartArea({holdings, userBalances, user}) {
       setData(data)
     }
     collectData()
-  }, [holdings])
+  }, [transactions, holdings])
 
   useEffect(() => {
     async function updateUserBalances() {

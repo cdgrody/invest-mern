@@ -29,7 +29,7 @@ export default function OverviewPage({
 
   return (
     <div className="main-body">
-      <div className="chart-area"><ChartArea holdings={holdings} userBalances={userBalances} user={user} /></div>
+      <div className="chart-area"><ChartArea holdings={holdings} transactions={transactions} userBalances={userBalances} user={user} /></div>
       <div className="bottom-half">
         <div className="left-area">
           {showTransactionForm ? (
