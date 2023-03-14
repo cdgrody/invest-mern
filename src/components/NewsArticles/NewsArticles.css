@@ -1,39 +1,4 @@
-.news-link {
-    color: inherit;
-    text-decoration: none;
-    width: 60%;
-  }
-  
-  .news-card {
-    background-color: black;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(100, 100, 100, 0.25);
-  }
-  
-  .news-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  .news-details {
-    padding: 16px;
-    text-align: left;
-  }
-  
-  .news-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  
-  .news-source {
-    font-size: 16px;
-    font-style: italic;
-    color: rgba(238, 207, 58, 1);
-  }
-  
+.news-article-list {
+    width: 70%;
+    margin-top: 1vh;
+}

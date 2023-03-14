@@ -78,6 +78,7 @@ export default function OverviewPage({
               >
                 AI Investing Advice ▼
               </div>
+              <h1 className="ai-investing-advice-card">Coming Soon!!!</h1>
             </>
           )}
           {showNews ? (

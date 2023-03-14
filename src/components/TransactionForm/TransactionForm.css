@@ -10,13 +10,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  width: 65%;
-  color: rgba(238, 207, 58, 1);
+  width: 75%;
+  /* color: rgba(238, 207, 58, 1);
+   */
+   color: white;
+   padding: 1vh;
+  background: black;
+  box-shadow: 0 2px 6px rgba(255, 254, 254, 0.25);
+  border-radius: 1vh;
+  margin: 1vh 0 1vh 0;
 }
 
 #buying-power {
-  font-size: 18px;
+  font-size: 24px;
   align-self: center;
+  color: white;
+  text-emphasis-color:  0 2px 4px rgba(238, 207, 58, 1);
+  margin-bottom: 1vh;
 }
 
 .ticker-ctr {
@@ -24,6 +34,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+  height: 40px;
   width: 100%;
 }
 
@@ -40,12 +51,28 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+  height: 40px;
   width: 100%;
 }
 
+.options-ctr > *, .ticker-ctr >*, .amount-ctr > * {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  font-size: 20px;
+  height: 100%;
+  width: 100%;
+  border-radius: 10vh;
+}
+
 .comment-ctr {
-  width: 90%;
+  width: 87%;
   height: 50px;
+  border-radius: 13vh;
+}
+
+.comment-ctr > input {
+  border-radius: 5vh;
 }
 
 .ticker-ctr > * {

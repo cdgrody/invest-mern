@@ -153,18 +153,18 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
               className="ticker-selector"
             >
               <option>Select</option>
+              <option value={9}>{assetList[9].ticker}</option>
+              <option value={8}>{assetList[8].ticker}</option>
+              <option value={5}>{assetList[5].ticker}</option>
+              <option value={7}>{assetList[7].ticker}</option>
+              <option value={6}>{assetList[6].ticker}</option>
               <option value={0}>{assetList[0].ticker}</option>
               <option value={1}>{assetList[1].ticker}</option>
               <option value={2}>{assetList[2].ticker}</option>
               <option value={3}>{assetList[3].ticker}</option>
               <option value={4}>{assetList[4].ticker}</option>
-              <option value={5}>{assetList[5].ticker}</option>
-              <option value={6}>{assetList[6].ticker}</option>
-              <option value={7}>{assetList[7].ticker}</option>
-              <option value={8}>{assetList[8].ticker}</option>
-              <option value={9}>{assetList[9].ticker}</option>
             </select>
-            <label> = ${assetPrice} / share</label>
+            <label> = ${assetPrice.toFixed(2)} / share</label>
           </div>
           <div className="amount-ctr">
             <input
