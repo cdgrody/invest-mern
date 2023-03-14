@@ -101,12 +101,11 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
     evt.preventDefault();
     newHolding.shares = universalMultiplier * newHolding.shares;
     const addedHolding = await manageHolding(newHolding, holdingsTracker);
-    newTransaction.holding = addedHolding._id;
+    const addedTransaction = await addTransaction(newTransaction);
     const newBalance = userBalances.balance + parseInt(newTransaction.transactionType) * newTransaction.dollars
     userBalances.balance = newBalance;
     const addUpdatedUserBalances = await updateUserBalances(userBalances)
     if(newBalance > 0) setNewUserBalance(userBalances)
-    const addedTransaction = await addTransaction(newTransaction);
     setNewUserBalance({
       balance: newBalance,
       user: user

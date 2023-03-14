@@ -1,6 +1,7 @@
 const Transaction = require('../../models/transaction')
 const User = require('../../models/user')
 const UserBalance = require('../../models/userBalance')
+const Holding = require('../../models/holding')
 
 module.exports = {
     create,
@@ -21,11 +22,15 @@ const assetList = [
 ]
 
 async function create(req, res) {
-    console.log('create transaction')
     try {
-        const userBalance = UserBalance.findOne({ user: req.user })
-        if(req.body.transaction === "-1" && userBalance - req.body.dollars < 0) res.status(400).json(err)
+        const userBalance = await UserBalance.find({ user: req.user })
         req.body.asset = assetList[req.body.asset]
+        const existingHolding = await Holding.findOne({
+            asset: req.body.asset,
+            user: req.user,
+          });
+        req.body.holding = existingHolding
+        if(req.body.transaction === "-1" && userBalance[0].balance - req.body.dollars < 0) res.status(400).json(err)
         const transaction = await Transaction.create(req.body)
         res.json(transaction)
     } catch (err) {

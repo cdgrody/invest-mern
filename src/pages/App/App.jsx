@@ -43,7 +43,7 @@ export default function App() {
     const newTransactions = [...transactions, newTransaction];
     setTransactions(newTransactions);
     setUserBalances(addUpdatedUserBalances)
-    const newHoldings = [...addedHolding]
+    const newHoldings = [...holdings, addedHolding]
     setHoldings(newHoldings)
   }
 

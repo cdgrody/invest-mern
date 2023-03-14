@@ -101,18 +101,15 @@ async function create(req, res) {
 }
 
 async function update(req, res) {
-  console.log("update holding", req.body.shares);
   try {
     req.body.asset = assetList[req.body.asset];
     const existingHolding = await Holding.find({
       asset: req.body.asset,
       user: req.user,
     });
-    // console.log('existing holding', existingHolding[0], req.body.shares)
     const newShares = existingHolding[0].shares + req.body.shares;
     if (newShares < 0) res.status(400).json(err);
     existingHolding[0].shares = newShares;
-    // console.log("new shares > 0", existingHolding[0]);
     await existingHolding[0].updateOne({ shares: newShares });
     res.json(existingHolding);
   } catch (err) {
