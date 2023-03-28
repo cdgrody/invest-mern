@@ -16,6 +16,18 @@ export default function AuthPage({ setUser }) {
         setLogInState(-logInState)
     }
 
+    function handleSignUpClick() {
+        setGuestState(-1)
+        setLogInState(-1)
+        setSignUpState(-signUpState)
+    }
+
+    function handleGuestClick() {
+        setSignUpState(-1)
+        setLogInState(-1)
+        setGuestState(-guestState)
+    }
+
   return (
     <>
         <NavBar />
@@ -28,10 +40,22 @@ export default function AuthPage({ setUser }) {
         <div className="auth-buttons">
           <div className="button-bar">
             <div onClick={handleLoginClick}>Log In</div>
-            <div>Sign Up</div>
-            <div>Guest</div>
+            <div onClick={handleSignUpClick}>Sign Up</div>
+            <div  onClick={handleGuestClick}>Guest</div>
           </div>
           {logInState < 0? (
+              <></>
+          )
+          : (
+          <LoginForm setUser={setUser} /> 
+        )}
+          {signUpState < 0? (
+              <></>
+          )
+          : (
+          <SignUpForm setUser={setUser} /> 
+        )}
+          {guestState < 0? (
               <></>
           )
           : (
