@@ -1,3 +1,39 @@
 .auth-title {
     color: rgba(238, 207, 58, 1);
 }
+
+.chart-area {
+    height: 50%;
+}
+
+.auth-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 50%;
+}
+
+.button-bar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: rgba(238, 207, 58, 1);
+    width: 50%;
+    height: 15%;
+    font-size: 24px;
+    font-weight: bold;
+    color: rgba(28, 31, 39, 1);
+    border-radius: 15vmin;
+    margin-bottom: 1%;
+}
+
+.button-bar > * {
+    cursor: pointer;
+}
+
+
+.button-bar > *:hover {
+    color: white;
+}
+
