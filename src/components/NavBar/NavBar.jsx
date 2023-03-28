@@ -25,9 +25,14 @@ export default function NavBar({ user, setUser }) {
             </Link>
           </>
         ) : (
-          <Link to="/login" className="login">
+          <>
+          {/* <Link to="/login" className="login">
             Log In
           </Link>
+          <Link to="/signup" className="signup">
+            SignUp
+          </Link> */}
+          </>
         )}
       </div>
     </nav>
