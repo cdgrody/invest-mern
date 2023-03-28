@@ -10,60 +10,49 @@ export default function AuthPage({ setUser }) {
   const [signUpState, setSignUpState] = useState(-1);
   const [guestState, setGuestState] = useState(-1);
 
-    function handleLoginClick() {
-        setSignUpState(-1)
-        setGuestState(-1)
-        setLogInState(-logInState)
-    }
+  function handleLoginClick() {
+    setSignUpState(-1);
+    setGuestState(-1);
+    setLogInState(-logInState);
+  }
 
-    function handleSignUpClick() {
-        setGuestState(-1)
-        setLogInState(-1)
-        setSignUpState(-signUpState)
-    }
+  function handleSignUpClick() {
+    setGuestState(-1);
+    setLogInState(-1);
+    setSignUpState(-signUpState);
+  }
 
-    function handleGuestClick() {
-        setSignUpState(-1)
-        setLogInState(-1)
-        setGuestState(-guestState)
-    }
+  function handleGuestClick() {
+    setSignUpState(-1);
+    setLogInState(-1);
+    setGuestState(-guestState);
+  }
 
   return (
-    <>
-        <NavBar />
-        {/* <ChartArea /> */}
-        {/* <div className="auth-title">
+    <main className='auth-main'>
+      <NavBar />
+      {/* <ChartArea /> */}
+      {/* <div className="auth-title">
             <h1>Welcome to Invest-MERN</h1>
             <h2>Earn, Learn, and Invest-MERN</h2>
         </div> */}
-        <div className="chart-area">Chart Area</div>
-        <div className="auth-buttons">
-          <div className="button-bar">
-            <div onClick={handleLoginClick}>Log In</div>
-            <div onClick={handleSignUpClick}>Sign Up</div>
-            <div  onClick={handleGuestClick}>Guest</div>
-          </div>
-          {logInState < 0? (
-              <></>
-          )
-          : (
-          <LoginForm setUser={setUser} /> 
-        )}
-          {signUpState < 0? (
-              <></>
-          )
-          : (
-          <SignUpForm setUser={setUser} /> 
-        )}
-          {guestState < 0? (
-              <></>
-          )
-          : (
-          <LoginForm setUser={setUser} /> 
-        )}
-          {/* <SignUpForm setUser={setUser} />
-        <LoginForm setUser={setUser} /> */}
+      <div className="chart-area">Chart Area</div>
+      <div className="auth-buttons">
+        <div className="button-bar">
+          <div onClick={handleLoginClick}>Log In</div>
+          <div onClick={handleSignUpClick}>Sign Up</div>
+          <div onClick={handleGuestClick}>Guest</div>
         </div>
-    </>
+        <div className="authpage-forms">
+          {logInState < 0 ? <></> : <LoginForm setUser={setUser} />}
+          {signUpState < 0 ? <></> : <SignUpForm setUser={setUser} />}
+          {guestState < 0 ? <></> : 
+          <div className="guest-action">
+          <div className="guest-message">Continuing as a guest will mean your data will not be saved upon exit.</div>
+          <button>Sign In as Guest</button>
+          </div>}
+        </div>
+      </div>
+    </main>
   );
 }

@@ -1,9 +1,10 @@
-.auth-title {
+.auth-main {
     color: rgba(238, 207, 58, 1);
+    height: 100%;
 }
 
 .chart-area {
-    height: 50%;
+    height: 43%;
 }
 
 .auth-buttons {
@@ -11,7 +12,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 50%;
+    height: 57%;
 }
 
 .button-bar {
@@ -20,12 +21,16 @@
     align-items: center;
     background: rgba(238, 207, 58, 1);
     width: 50%;
-    height: 15%;
+    height: 12%;
     font-size: 24px;
     font-weight: bold;
     color: rgba(28, 31, 39, 1);
     border-radius: 15vmin;
-    margin-bottom: 1%;
+    margin-bottom: 2%;
+}
+
+.authpage-forms {
+    height: 50%;
 }
 
 .button-bar > * {
@@ -37,3 +42,14 @@
     color: white;
 }
 
+.guest-action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+}
+
+.guest-message {
+    width: 60%;
+}
