@@ -4,6 +4,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import { signUp } from '../../utilities/users-service'
 import { useState } from "react";
 import { ChartArea } from "chart.js";
+import { createBalance } from '../../utilities/userBalances-api'
 import "./AuthPage.css";
 
 export default function AuthPage({ setUser }) {
@@ -29,6 +30,7 @@ export default function AuthPage({ setUser }) {
     }
     const user = await signUp(formData)
     setUser(user);
+    await createBalance({balance: 1000})
   }
 
   function handleLoginClick() {
