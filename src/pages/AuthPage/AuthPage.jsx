@@ -1,6 +1,7 @@
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import NavBar from "../../components/NavBar/NavBar";
+import { signUp } from '../../utilities/users-service'
 import { useState } from "react";
 import { ChartArea } from "chart.js";
 import "./AuthPage.css";
@@ -9,6 +10,26 @@ export default function AuthPage({ setUser }) {
   const [logInState, setLogInState] = useState(-1);
   const [signUpState, setSignUpState] = useState(-1);
   const [guestState, setGuestState] = useState(-1);
+//   const [credentials, setCredentials] = useState({
+//     name: "",
+//     email: "",
+//     password: "",
+//     confirm: "",
+//     error: ""
+//   });
+
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+    let currentDate = new Date();
+    const formData = {
+        name: "Guest",
+        email: `${currentDate.toLocaleDateString()}-${currentDate.toLocaleTimeString()}@guest.com`,
+        password: `${currentDate.toLocaleDateString()}-${currentDate.toLocaleTimeString()}`,
+        confirm: `${currentDate.toLocaleDateString()}-${currentDate.toLocaleTimeString()}`,
+    }
+    const user = await signUp(formData)
+    setUser(user);
+  }
 
   function handleLoginClick() {
     setSignUpState(-1);
@@ -29,7 +50,7 @@ export default function AuthPage({ setUser }) {
   }
 
   return (
-    <main className='auth-main'>
+    <main className="auth-main">
       <NavBar />
       {/* <ChartArea /> */}
       {/* <div className="auth-title">
@@ -46,11 +67,17 @@ export default function AuthPage({ setUser }) {
         <div className="authpage-forms">
           {logInState < 0 ? <></> : <LoginForm setUser={setUser} />}
           {signUpState < 0 ? <></> : <SignUpForm setUser={setUser} />}
-          {guestState < 0 ? <></> : 
-          <div className="guest-action">
-          <div className="guest-message">Continuing as a guest will mean your data will not be saved upon exit.</div>
-          <button>Sign In as Guest</button>
-          </div>}
+          {guestState < 0 ? (
+            <></>
+          ) : (
+            <div className="guest-action">
+              <div className="guest-message">
+                Continuing as a guest will mean your data will not be saved upon
+                exit.
+              </div>
+              <button onClick={handleSubmit}>Sign In as Guest</button>
+            </div>
+          )}
         </div>
       </div>
     </main>
