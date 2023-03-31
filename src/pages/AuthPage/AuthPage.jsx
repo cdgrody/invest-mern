@@ -48,12 +48,8 @@ export default function AuthPage({ setUser }) {
   return (
     <main className="auth-main">
       <NavBar />
-      <AuthChartArea />
-      {/* <div className="auth-title">
-            <h1>Welcome to Invest-MERN</h1>
-            <h2>Earn, Learn, and Invest-MERN</h2>
-        </div> */}
-      {/* <div className="chart-area">Chart Area</div> */}
+      {/* <AuthChartArea /> */}
+      <div className="auth-chart-area"><AuthChartArea /></div>
       <div className="auth-buttons">
         <div className="button-bar">
           <div onClick={handleLoginClick}>Log In</div>

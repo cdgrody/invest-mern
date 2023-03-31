@@ -1,10 +1,15 @@
 .auth-main {
+    display: flex;
+    flex-direction: column;
     color: rgba(238, 207, 58, 1);
     height: 100%;
 }
 
-.chart-area {
+.auth-chart-area {
+    display: flex;
+    align-self: center;
     height: 43%;
+    width: 80%;
 }
 
 .auth-buttons {
