@@ -1,13 +1,14 @@
 .auth-chart-title-info {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   color: rgba(238, 207, 58, 1);
 }
 
-.chart-title-info > * {
-    text-align: right;
+.auth-chart-title-info > * {
+  text-align: right;
   margin: 0.1vh;
+  align-self: center;
 }
 
 .positive-percent {
