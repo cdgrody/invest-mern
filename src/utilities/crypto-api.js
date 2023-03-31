@@ -131,7 +131,7 @@ function generateRandomPrice(symbol) {
   return newPrice * (Math.random() * 0.1 + 0.95);
 }
 
-export async function computeUserPerformance(holdings, userBalances) {
+export async function computeUserPerformance(holdings=0, userBalances=0, cryptoKey=0) {
   const performanceData = [
     { time: 0, dollars: userBalances.balance },
     { time: 1, dollars: userBalances.balance },
@@ -162,13 +162,21 @@ export async function computeUserPerformance(holdings, userBalances) {
   const newPerformanceData = performanceData;
   const minDollar = newPerformanceData[0].dollars;
   const maxDollar = newPerformanceData[0].dollars;
-  for (let holding of holdings) {
-    const holdingHistory = await getCryptoHistoricalData(holding.asset.key);
+  if (!holdings) {
+    for (let holding of holdings) {
+      const holdingHistory = await getCryptoHistoricalData(holding.asset.key)
+      for (let hh of holdingHistory) {
+        let idx = holdingHistory.indexOf(hh);
+        newPerformanceData[idx].dollars += holding.shares * hh[1];
+      }
+    }
+  } else {
+    const holdingHistory = await getCryptoHistoricalData(cryptoKey)
     for (let hh of holdingHistory) {
       let idx = holdingHistory.indexOf(hh);
-      newPerformanceData[idx].dollars += holding.shares * hh[1];
-    }
+      newPerformanceData[idx].dollars = hh[1];
   }
+}
   return newPerformanceData;
 }
 

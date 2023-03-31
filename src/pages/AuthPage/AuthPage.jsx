@@ -48,7 +48,7 @@ export default function AuthPage({ setUser }) {
   return (
     <main className="auth-main">
       <NavBar />
-      {/* <ChartArea /> */}
+      <AuthChartArea />
       {/* <div className="auth-title">
             <h1>Welcome to Invest-MERN</h1>
             <h2>Earn, Learn, and Invest-MERN</h2>
