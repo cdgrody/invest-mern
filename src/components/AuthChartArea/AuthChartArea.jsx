@@ -2,9 +2,9 @@ import {React, useState, useEffect} from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { computeUserPerformance } from '../../utilities/crypto-api';
 import { getUserBalances } from '../../utilities/userBalances-api';
-import './ChartArea.css'
+import './AuthChartArea.css'
 
-export default function ChartArea({holdings, userBalances, user, transactions}) {
+export default function AuthChartArea({holdings, userBalances, user, transactions}) {
 
   const [data, setData] = useState([])
   const [minDollarValue, setMinDollarValue] = useState(1000)

@@ -1,0 +1,23 @@
+.chart-title-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: rgba(238, 207, 58, 1);
+}
+
+.chart-title-info > * {
+    text-align: right;
+  margin: 0.1vh;
+}
+
+.positive-percent {
+  color: green;
+}
+
+.negative-percent {
+  color: red;
+}
+
+.custom-tooltip {
+    color: rgba(238, 207, 58, 1);
+}

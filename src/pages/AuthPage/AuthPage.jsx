@@ -3,21 +3,15 @@ import LoginForm from "../../components/LoginForm/LoginForm";
 import NavBar from "../../components/NavBar/NavBar";
 import { signUp } from '../../utilities/users-service'
 import { useState } from "react";
-import { ChartArea } from "chart.js";
+import ChartArea from "../../components/ChartArea/ChartArea";
 import { createBalance } from '../../utilities/userBalances-api'
+import AuthChartArea from "../../components/AuthChartArea/AuthChartArea";
 import "./AuthPage.css";
 
 export default function AuthPage({ setUser }) {
   const [logInState, setLogInState] = useState(-1);
   const [signUpState, setSignUpState] = useState(-1);
   const [guestState, setGuestState] = useState(-1);
-//   const [credentials, setCredentials] = useState({
-//     name: "",
-//     email: "",
-//     password: "",
-//     confirm: "",
-//     error: ""
-//   });
 
   async function handleSubmit(evt) {
     evt.preventDefault();
@@ -59,7 +53,7 @@ export default function AuthPage({ setUser }) {
             <h1>Welcome to Invest-MERN</h1>
             <h2>Earn, Learn, and Invest-MERN</h2>
         </div> */}
-      <div className="chart-area">Chart Area</div>
+      {/* <div className="chart-area">Chart Area</div> */}
       <div className="auth-buttons">
         <div className="button-bar">
           <div onClick={handleLoginClick}>Log In</div>
