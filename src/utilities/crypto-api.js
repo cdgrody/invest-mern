@@ -106,23 +106,23 @@ function generateRandomHistoricalPrices(symbol) {
 }
 
 export async function getCryptoHistoricalData(symbol) {
-//   if(symbol < 5) {
-//     return generateRandomHistoricalPrices(symbol)
-//   } else {
-//     try {
-//     const response = await fetch(
-//       `https://api.coingecko.com/api/v3/coins/${assetList[
-//         symbol
-//       ].fullName.toLowerCase()}/market_chart?vs_currency=usd&days=1&interval=hourly`
-//     );
-//     const data = await response.json();
-//     const price = data.prices;
-//     return price;
-//   } catch (error) {
-//     console.log(error);
-//     return generateRandomHistoricalPrices(symbol);
-//   }
-// }
+  //   if(symbol < 5) {
+  //     return generateRandomHistoricalPrices(symbol)
+  //   } else {
+  //     try {
+  //     const response = await fetch(
+  //       `https://api.coingecko.com/api/v3/coins/${assetList[
+  //         symbol
+  //       ].fullName.toLowerCase()}/market_chart?vs_currency=usd&days=1&interval=hourly`
+  //     );
+  //     const data = await response.json();
+  //     const price = data.prices;
+  //     return price;
+  //   } catch (error) {
+  //     console.log(error);
+  //     return generateRandomHistoricalPrices(symbol);
+  //   }
+  // }
   return generateRandomHistoricalPrices(symbol);
 }
 
@@ -131,7 +131,7 @@ function generateRandomPrice(symbol) {
   return newPrice * (Math.random() * 0.1 + 0.95);
 }
 
-export async function computeUserPerformance(holdings=0, userBalances=0, cryptoKey=0) {
+export async function computeUserPerformance(holdings, userBalances) {
   const performanceData = [
     { time: 0, dollars: userBalances.balance },
     { time: 1, dollars: userBalances.balance },
@@ -160,24 +160,45 @@ export async function computeUserPerformance(holdings=0, userBalances=0, cryptoK
     { time: 24, dollars: userBalances.balance },
   ];
   const newPerformanceData = performanceData;
-  const minDollar = newPerformanceData[0].dollars;
-  const maxDollar = newPerformanceData[0].dollars;
-  if (!holdings) {
-    for (let holding of holdings) {
-      const holdingHistory = await getCryptoHistoricalData(holding.asset.key)
-      for (let hh of holdingHistory) {
-        let idx = holdingHistory.indexOf(hh);
-        newPerformanceData[idx].dollars += holding.shares * hh[1];
-      }
-    }
-  } else {
-    const holdingHistory = await getCryptoHistoricalData(cryptoKey)
+  for (let holding of holdings) {
+    const holdingHistory = await getCryptoHistoricalData(holding.asset.key);
     for (let hh of holdingHistory) {
       let idx = holdingHistory.indexOf(hh);
-      newPerformanceData[idx].dollars = hh[1];
+      newPerformanceData[idx].dollars += holding.shares * hh[1];
+    }
   }
-}
   return newPerformanceData;
+}
+
+export async function computeGenericAssetPerformance(key) {
+  const performanceData = [
+    { time: 0, dollars: 0 },
+    { time: 1, dollars: 0 },
+    { time: 2, dollars: 0 },
+    { time: 3, dollars: 0 },
+    { time: 4, dollars: 0 },
+    { time: 5, dollars: 0 },
+    { time: 6, dollars: 0 },
+    { time: 7, dollars: 0 },
+    { time: 8, dollars: 0 },
+    { time: 9, dollars: 0 },
+    { time: 10, dollars: 0 },
+    { time: 11, dollars: 0 },
+    { time: 12, dollars: 0 },
+    { time: 13, dollars: 0 },
+    { time: 14, dollars: 0 },
+    { time: 15, dollars: 0 },
+    { time: 16, dollars: 0 },
+    { time: 17, dollars: 0 },
+    { time: 18, dollars: 0 },
+    { time: 19, dollars: 0 },
+    { time: 20, dollars: 0 },
+    { time: 21, dollars: 0 },
+    { time: 22, dollars: 0 },
+    { time: 23, dollars: 0 },
+    { time: 24, dollars: 0 },
+  ];
+  return performanceData;
 }
 
 //retrieved api at https://www.coingecko.com/en/api/documentation

@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { computeUserPerformance, getCryptoHistoricalData } from '../../utilities/crypto-api';
+import { computeUserPerformance, computeGenericAssetPerformance } from '../../utilities/crypto-api';
 import { getUserBalances } from '../../utilities/userBalances-api';
 import './AuthChartArea.css'
 
@@ -16,10 +16,10 @@ export default function AuthChartArea() {
 
   useEffect(() => {
     async function collectData(){
-      console.log('auth chart area')
-      const data = await computeUserPerformance(0, 0, 1)
-      console.log(data)
+      const data = await computeGenericAssetPerformance(0, 0, 1)
+      setData(data)
     }
+    collectData()
   }, [])
 
   // useEffect(() => {
@@ -82,6 +82,7 @@ export default function AuthChartArea() {
         <Line type="monotone" dataKey="dollars" stroke="gold" activeDot={{ r: 8 }} />
       </LineChart>
     </ResponsiveContainer> */}
+    <div>HELLLLLLLLLLOOOOOOOOOOO</div>
     </>
   );
 }
