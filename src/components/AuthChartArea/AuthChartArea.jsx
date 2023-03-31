@@ -7,16 +7,21 @@ import './AuthChartArea.css'
 export default function AuthChartArea() {
 
   const [data, setData] = useState([])
-  // const [minDollarValue, setMinDollarValue] = useState(1000)
-  // const [maxDollarValue, setMaxDollarValue] = useState(1000)
+  const [minDollarValue, setMinDollarValue] = useState(0)
+  const [maxDollarValue, setMaxDollarValue] = useState(0)
   // const [newUserBalance, setNewUserBalance] = useState(userBalances)
   // const [userNetWorth, setUserNetWorth] = useState(0)
-  // const [percentChange, setPercentChange] = useState(0)
+  const [percentChange, setPercentChange] = useState(0)
 
 
   useEffect(() => {
     async function collectData(){
-      const data = await computeGenericAssetPerformance(0, 0, 1)
+      const data = await computeGenericAssetPerformance(1)
+      const minDollarValue = Math.min(...data.map(item => item.dollars));
+      const maxDollarValue = Math.max(...data.map(item => item.dollars));
+      setMinDollarValue(minDollarValue.toFixed(0))
+      setMaxDollarValue(maxDollarValue.toFixed(0))
+      setPercentChange((100*(data[data.length-1].dollars - data[0].dollars)/(data[data.length-1].dollars)).toFixed(2))
       setData(data)
     }
     collectData()
@@ -60,8 +65,8 @@ export default function AuthChartArea() {
 
   return (
     <>
-    {/* <div className='chart-title-info'>
-    <h1>${userNetWorth}</h1>
+    <div className='chart-title-info'>
+    {/* <h1>${data[24].dollars}</h1> */}
     <h2 className={percentChange >= 0 ? `positive-percent` : `negative-percent`}>{percentChange >= 0 ? `⬆ %${percentChange}` : `⬇ %${percentChange * -1}`}</h2>
     </div>
     <ResponsiveContainer width="80%" height="100%">
@@ -81,7 +86,7 @@ export default function AuthChartArea() {
         <Tooltip content={<CustomTooltip />} />
         <Line type="monotone" dataKey="dollars" stroke="gold" activeDot={{ r: 8 }} />
       </LineChart>
-    </ResponsiveContainer> */}
+    </ResponsiveContainer>
     <div>HELLLLLLLLLLOOOOOOOOOOO</div>
     </>
   );

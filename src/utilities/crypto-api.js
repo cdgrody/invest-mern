@@ -198,6 +198,12 @@ export async function computeGenericAssetPerformance(key) {
     { time: 23, dollars: 0 },
     { time: 24, dollars: 0 },
   ];
+  const newPerformanceData = performanceData;
+  const holdingHistory = await getCryptoHistoricalData(key);
+  for (let hh of holdingHistory) {
+    let idx = holdingHistory.indexOf(hh);
+    newPerformanceData[idx].dollars += hh[1];
+  }
   return performanceData;
 }
 
