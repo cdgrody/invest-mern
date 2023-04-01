@@ -13,6 +13,7 @@ export default function AuthPage({ setUser }) {
   const [signUpState, setSignUpState] = useState(-1);
   const [guestState, setGuestState] = useState(-1);
 
+
   async function handleSubmit(evt) {
     evt.preventDefault();
     let currentDate = new Date();

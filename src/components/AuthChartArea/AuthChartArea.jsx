@@ -21,10 +21,28 @@ export default function AuthChartArea() {
   const [minDollarValue, setMinDollarValue] = useState(0);
   const [maxDollarValue, setMaxDollarValue] = useState(0);
   const [percentChange, setPercentChange] = useState(0);
+  const [ticker, setTicker] = useState(5)
+
+  let x = 0
+  const tickers = ['BTC', 'ETH', 'DOGE', 'BNB', 'ADA']
+  async function cycle() {
+    setTimeout(function() {
+      // console.log(ticker)
+      // x += 1
+      // setTicker(x+5)
+      // x %= 4
+      // cycle()
+      console.log(ticker)
+      x += 1
+      setTicker(x+5)
+      x %= 4
+    }, 5000)
+  }
+  cycle()
 
   useEffect(() => {
     async function collectData() {
-      const data = await computeGenericAssetPerformance(6);
+      const data = await computeGenericAssetPerformance(ticker+5);
       const minDollarValue = Math.min(...data.map((item) => item.dollars));
       const maxDollarValue = Math.max(...data.map((item) => item.dollars));
       setMinDollarValue(minDollarValue.toFixed(0));
@@ -38,7 +56,7 @@ export default function AuthChartArea() {
       setData(data);
     }
     collectData();
-  }, []);
+  }, [ticker]);
 
   function CustomTooltip({ payload, label, active }) {
     if (active) {
@@ -58,7 +76,7 @@ export default function AuthChartArea() {
   return (
     <>
       <div className="auth-chart-title-info">
-        <h1>Bitcoin</h1>
+        <h1>{tickers[ticker]}</h1>
         <h2
           className={
             percentChange >= 0 ? `positive-percent` : `negative-percent`
