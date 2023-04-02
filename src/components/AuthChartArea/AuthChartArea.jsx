@@ -25,19 +25,7 @@ export default function AuthChartArea() {
 
   let x = 0
   const tickers = ['BTC', 'ETH', 'DOGE', 'BNB', 'ADA']
-  // function cycle() {
-  //   setTimeout(function() {
-  //     // console.log(ticker)
-  //     // x += 1
-  //     // setTicker(x+5)
-  //     // x %= 4
-  //     console.log(ticker)
-  //     x += 1
-  //     setTicker(x)
-  //     x %= 4
-  //     cycle()
-  //   }, 5000)
-  // }
+
   function cycle() {
     const interval = setInterval(() => {
       setTicker((ticker) => (ticker + 1) % (tickers.length-1))
