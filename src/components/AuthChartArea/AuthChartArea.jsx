@@ -21,24 +21,34 @@ export default function AuthChartArea() {
   const [minDollarValue, setMinDollarValue] = useState(0);
   const [maxDollarValue, setMaxDollarValue] = useState(0);
   const [percentChange, setPercentChange] = useState(0);
-  const [ticker, setTicker] = useState(5)
+  const [ticker, setTicker] = useState(0)
 
   let x = 0
   const tickers = ['BTC', 'ETH', 'DOGE', 'BNB', 'ADA']
-  async function cycle() {
-    setTimeout(function() {
-      // console.log(ticker)
-      // x += 1
-      // setTicker(x+5)
-      // x %= 4
-      // cycle()
-      console.log(ticker)
-      x += 1
-      setTicker(x+5)
-      x %= 4
+  // function cycle() {
+  //   setTimeout(function() {
+  //     // console.log(ticker)
+  //     // x += 1
+  //     // setTicker(x+5)
+  //     // x %= 4
+  //     console.log(ticker)
+  //     x += 1
+  //     setTicker(x)
+  //     x %= 4
+  //     cycle()
+  //   }, 5000)
+  // }
+  function cycle() {
+    const interval = setInterval(() => {
+      setTicker((ticker) => (ticker + 1) % (tickers.length-1))
     }, 5000)
+    return () => clearInterval(interval);
   }
-  cycle()
+
+  useEffect(() => {
+    const cleanup = cycle();
+    return cleanup;
+  }, []);
 
   useEffect(() => {
     async function collectData() {
