@@ -25,11 +25,15 @@
 .toggle-time-range {
   display: flex;
   justify-content: space-between;
-  color: black;
+  color: white;
   font-weight: bold;
-  background-color: rgb(255, 255, 255);
-  border: solid rgba(238, 207, 58, 1);
+  border: solid 1px rgba(238, 207, 58, 1);
   border-radius: 5px;
+}
+
+.toggle-time-range > * {
+  text-align: center;
+  border: none;
 }
 
 .toggle-time-range:hover {
@@ -39,4 +43,10 @@
 .toggle-time-range > *:hover {
   cursor: pointer;
   background: rgba(238, 207, 58, 1);
+  color: black;
+}
+
+#select {
+  background: rgba(238, 207, 58, 1);
+  color: black;
 }

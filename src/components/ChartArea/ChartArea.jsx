@@ -12,7 +12,13 @@ export default function ChartArea({holdings, userBalances, user, transactions}) 
   const [newUserBalance, setNewUserBalance] = useState(userBalances)
   const [userNetWorth, setUserNetWorth] = useState(0)
   const [percentChange, setPercentChange] = useState(0)
-
+  const [selectTime, setSelectTime] = useState({
+    'HR': 0,
+    'DY': 0,
+    'WK': 0,
+    'MTH': 0,
+    'YR': 0,
+  })
 
   useEffect(() => {
     async function collectData(){
@@ -37,6 +43,17 @@ export default function ChartArea({holdings, userBalances, user, transactions}) 
     if(user) updateUserBalances();
   }, [user._id]);
 
+  function handleTimeIntervalClick(evt) {
+        setSelectTime({
+          'HR': 0,
+          'DY': 0,
+          'WK': 0,
+          'MTH': 0,
+          'YR': 0,
+          [evt.target.dataset.value]: 1
+    })
+  }
+
   function CustomTooltip({ payload, label, active }) {
     if (active) {
       return (
@@ -56,11 +73,11 @@ export default function ChartArea({holdings, userBalances, user, transactions}) 
     <h1>${userNetWorth}</h1>
     <h2 className={percentChange >= 0 ? `positive-percent` : `negative-percent`}>{percentChange >= 0 ? `⬆ %${percentChange}` : `⬇ %${percentChange * -1}`}</h2>
     <div className='toggle-time-range'>
-      <div>HR</div>
-      <div>DY</div>
-      <div>WK</div>
-      <div>MTH</div>
-      <div>YR</div>
+      <div id={selectTime.HR ? "select" : "deselect"} onClick={handleTimeIntervalClick} data-value={"HR"}>HR</div>
+      <div id={selectTime.DY ? "select" : "deselect"} onClick={handleTimeIntervalClick} data-value={"DY"}>DY</div>
+      <div id={selectTime.WK ? "select" : "deselect"} onClick={handleTimeIntervalClick} data-value={"WK"}>WK</div>
+      <div id={selectTime.MTH ? "select" : "deselect"} onClick={handleTimeIntervalClick} data-value={"MTH"}>MTH</div>
+      <div id={selectTime.YR ? "select" : "deselect"} onClick={handleTimeIntervalClick} data-value={"YR"}>YR</div>
     </div>
     </div>
     <ResponsiveContainer width="80%" height="100%">
