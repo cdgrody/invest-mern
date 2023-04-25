@@ -26,6 +26,7 @@ Invest-MERN is a web application based in that uses the MongoDB, Express, NodeJS
 - AAU, when I sell off MY holdings, the row for that holding disappers.
 - AAU, I want a button where I can directly sell some or all of my holdings on the holdings table.
 - AAU, I want to be able to repeat a transaction by clicking on it in the transaction list.
+- AAU, I want to integrate the ChatGPT API to give users investing advice.
 
 ## Poem
 

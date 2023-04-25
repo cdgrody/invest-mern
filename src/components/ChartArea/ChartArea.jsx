@@ -55,6 +55,13 @@ export default function ChartArea({holdings, userBalances, user, transactions}) 
     <div className='chart-title-info'>
     <h1>${userNetWorth}</h1>
     <h2 className={percentChange >= 0 ? `positive-percent` : `negative-percent`}>{percentChange >= 0 ? `⬆ %${percentChange}` : `⬇ %${percentChange * -1}`}</h2>
+    <div className='toggle-time-range'>
+      <div>HR</div>
+      <div>DY</div>
+      <div>WK</div>
+      <div>MTH</div>
+      <div>YR</div>
+    </div>
     </div>
     <ResponsiveContainer width="80%" height="100%">
       <LineChart

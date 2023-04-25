@@ -21,3 +21,22 @@
 .custom-tooltip {
     color: rgba(238, 207, 58, 1);
 }
+
+.toggle-time-range {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  border: solid rgba(238, 207, 58, 1);
+  border-radius: 5px;
+}
+
+.toggle-time-range:hover {
+  cursor: pointer;
+}
+
+.toggle-time-range > *:hover {
+  cursor: pointer;
+  background: rgba(238, 207, 58, 1);
+}
