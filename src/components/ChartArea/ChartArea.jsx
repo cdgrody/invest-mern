@@ -14,9 +14,9 @@ export default function ChartArea({holdings, userBalances, user, transactions}) 
   const [percentChange, setPercentChange] = useState(0)
   const [selectTime, setSelectTime] = useState({
     'HR': 0,
-    'DY': 0,
+    'DY': 1,
     'WK': 0,
-    'MTH': 0,
+    'MH': 0,
     'YR': 0,
   })
 
@@ -76,7 +76,7 @@ export default function ChartArea({holdings, userBalances, user, transactions}) 
       <div id={selectTime.HR ? "select" : "deselect"} onClick={handleTimeIntervalClick} data-value={"HR"}>HR</div>
       <div id={selectTime.DY ? "select" : "deselect"} onClick={handleTimeIntervalClick} data-value={"DY"}>DY</div>
       <div id={selectTime.WK ? "select" : "deselect"} onClick={handleTimeIntervalClick} data-value={"WK"}>WK</div>
-      <div id={selectTime.MTH ? "select" : "deselect"} onClick={handleTimeIntervalClick} data-value={"MTH"}>MTH</div>
+      <div id={selectTime.MH ? "select" : "deselect"} onClick={handleTimeIntervalClick} data-value={"MH"}>MH</div>
       <div id={selectTime.YR ? "select" : "deselect"} onClick={handleTimeIntervalClick} data-value={"YR"}>YR</div>
     </div>
     </div>
