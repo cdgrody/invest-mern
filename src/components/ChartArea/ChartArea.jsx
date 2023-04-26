@@ -19,11 +19,13 @@ export default function ChartArea({holdings, userBalances, user, transactions}) 
     'MH': 0,
     'YR': 0,
   })
+  const [timeInterval, setTimeInterval] = useState('DY')
 
   useEffect(() => {
     async function collectData(){
+      console.log('using effect')
       const holdingsIterable = Array.from(holdings);
-      const data = await computeUserPerformance(holdingsIterable, userBalances)
+      const data = await computeUserPerformance(holdingsIterable, userBalances, timeInterval)
       const minDollarValue = Math.min(...data.map(item => item.dollars));
       const maxDollarValue = Math.max(...data.map(item => item.dollars));
       setMinDollarValue(minDollarValue.toFixed(0))
@@ -33,7 +35,7 @@ export default function ChartArea({holdings, userBalances, user, transactions}) 
       setData(data)
     }
     if(user) collectData()
-  }, [transactions, holdings])
+  }, [transactions, holdings, timeInterval])
 
   useEffect(() => {
     async function updateUserBalances() {
@@ -48,10 +50,11 @@ export default function ChartArea({holdings, userBalances, user, transactions}) 
           'HR': 0,
           'DY': 0,
           'WK': 0,
-          'MTH': 0,
+          'MH': 0,
           'YR': 0,
           [evt.target.dataset.value]: 1
     })
+    setTimeInterval(evt.target.dataset.value)
   }
 
   function CustomTooltip({ payload, label, active }) {
