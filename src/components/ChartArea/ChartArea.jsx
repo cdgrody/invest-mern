@@ -20,10 +20,10 @@ export default function ChartArea({holdings, userBalances, user, transactions}) 
     'YR': 0,
   })
   const [timeInterval, setTimeInterval] = useState('DY')
+  const [holdingState, setHoldingState] = useState(holdings)
 
   useEffect(() => {
     async function collectData(){
-      console.log('using effect')
       const holdingsIterable = Array.from(holdings);
       const data = await computeUserPerformance(holdingsIterable, userBalances, timeInterval)
       const minDollarValue = Math.min(...data.map(item => item.dollars));

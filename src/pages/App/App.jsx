@@ -17,6 +17,7 @@ export default function App() {
   const [userBalances, setUserBalances] = useState(getUserBalances());
   const [holdings, setHoldings] = useState(getHoldings());
 
+
   useEffect(() => {
     async function fetchTransactions() {
       const transactions = await getTransactions();
@@ -50,7 +51,7 @@ export default function App() {
     const newTransactions = [...transactions, newTransaction];
     setTransactions(newTransactions);
     setUserBalances(addUpdatedUserBalances)
-    const newHoldings = [...holdings, addedHolding]
+    const newHoldings = await getHoldings()
     setHoldings(newHoldings)
   }
 

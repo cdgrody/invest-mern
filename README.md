@@ -22,7 +22,7 @@ Invest-MERN is a web application based in that uses the MongoDB, Express, NodeJS
 ![Click on a Transaction to View More Details](./public/investMERN3.png)
 
 ## Coming Soon
-- AAU, I can toggle between different time intervals on the perfromance chart to see my portfolio's performance over the past week, month, and year.
+- AAU, I want to be able to see a percent change in each holding from my original investment.
 - AAU, when I sell off MY holdings, the row for that holding disappers.
 - AAU, I want a button where I can directly sell some or all of my holdings on the holdings table.
 - AAU, I want to be able to repeat a transaction by clicking on it in the transaction list.

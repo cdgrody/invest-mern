@@ -96,6 +96,7 @@ export async function computeUserPerformance(holdings, userBalances, timeInterva
   const performanceData = Array.from({ length: interval[timeInterval].length}, (x, i) => ({'time': i + interval[timeInterval].start, 'dollars': userBalances.balance}))
   const newPerformanceData = performanceData;
   for (let holding of holdings) {
+    // console.log('print holding', holding, holding.length, holdings)
     let holdingHistory = await getCryptoHistoricalData(holding.asset.key, timeInterval);
     if(timeInterval === 'HR') {holdingHistory = holdingHistory.slice(289-13, 289)}
     for (let hh of holdingHistory) {
