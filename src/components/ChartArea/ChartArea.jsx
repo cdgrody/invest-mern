@@ -28,10 +28,10 @@ export default function ChartArea({holdings, userBalances, user, transactions}) 
       const data = await computeUserPerformance(holdingsIterable, userBalances, timeInterval)
       const minDollarValue = Math.min(...data.map(item => item.dollars));
       const maxDollarValue = Math.max(...data.map(item => item.dollars));
-      setMinDollarValue(minDollarValue.toFixed(0))
-      setMaxDollarValue(maxDollarValue.toFixed(0))
-      setUserNetWorth(data[data.length-1].dollars.toFixed(2))
-      setPercentChange((100*(data[data.length-1].dollars - data[0].dollars)/(data[data.length-1].dollars)).toFixed(2))
+      setMinDollarValue(minDollarValue)
+      setMaxDollarValue(maxDollarValue)
+      const netWorth = data[data.length-1].dollars
+      if(netWorth) setUserNetWorth(netWorth.toFixed(2)) && setPercentChange((100*(netWorth - data[0].dollars)/(netWorth)).toFixed(2))
       setData(data)
     }
     if(user) collectData()

@@ -64,11 +64,11 @@ export async function getCryptoData(symbol) {
 }
 
 const interval = {
-  'HR': {'days': 1, 'start': 0, 'length': 13, 'type': ''},
-  'DY': {'days': 1, 'start': 0, 'length': 25, 'type': '&interval=hourly'},
-  'WK': {'days': 7, 'start': 0, 'length': 8, 'type': '&interval=daily'},
-  'MH': {'days': 31, 'start': 0, 'length': 32, 'type': '&interval=daily'},
-  'YR': {'days': 365, 'start': 0, 'length': 366, 'type': '&interval=daily'},
+  'HR': {'days': 1, 'start': 0, 'length': 13, 'multiplier': 5, 'type': ''},
+  'DY': {'days': 1, 'start': 0, 'length': 25, 'multiplier': 1, 'type': '&interval=hourly'},
+  'WK': {'days': 7, 'start': 0, 'length': 8, 'multiplier': 1, 'type': '&interval=daily'},
+  'MH': {'days': 31, 'start': 0, 'length': 32, 'multiplier': 1, 'type': '&interval=daily'},
+  'YR': {'days': 365, 'start': 0, 'length': 366, 'multiplier': 1, 'type': '&interval=daily'},
 }
 
 export async function getCryptoHistoricalData(symbol, timeInterval) {
@@ -93,7 +93,7 @@ export async function getCryptoHistoricalData(symbol, timeInterval) {
 }
 
 export async function computeUserPerformance(holdings, userBalances, timeInterval) {
-  const performanceData = Array.from({ length: interval[timeInterval].length}, (x, i) => ({'time': i + interval[timeInterval].start, 'dollars': userBalances.balance}))
+  const performanceData = Array.from({ length: interval[timeInterval].length}, (x, i) => ({'time': (interval[timeInterval].length - 1 - i) * interval[timeInterval].multiplier + interval[timeInterval].start, 'dollars': userBalances.balance}))
   const newPerformanceData = performanceData;
   for (let holding of holdings) {
     // console.log('print holding', holding, holding.length, holdings)
