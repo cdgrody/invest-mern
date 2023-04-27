@@ -109,7 +109,6 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
     evt.preventDefault();
     const multiplier = await universalMultiplier;
     newHolding.shares = multiplier * shareCalculator();
-    // newTransaction.transactionType === "-1" ? newHolding.shares = newHolding.shares*1  :  newHolding.shares = -1 * newHolding.shares;
     const addedHolding = await manageHolding(newHolding, holdingsTracker);
     newTransaction.shares = shareCalculator();
     const addedTransaction = await addTransaction(newTransaction);
