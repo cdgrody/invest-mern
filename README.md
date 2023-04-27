@@ -23,11 +23,14 @@ Invest-MERN is a web application based in that uses the MongoDB, Express, NodeJS
 
 ## Coming Soon
 - AAU, I want to be able to see a percent change in each holding from my original investment.
-- AAU, when I sell off MY holdings, the row for that holding disappers.
+- AAU, I want to be able to see timestamps on the x-axis instead of whole numbers.
+- AAU, I want to see a smoothed chart on the year scale (maybe see weekly or monthly increments)
+- AAU, when I sell off all holdings, the row for that holding disappers.
 - AAU, when a transaction does not work, I want UI indicating that the transaction failed.
 - AAU, I want a button where I can directly sell some or all of my holdings on the holdings table.
 - AAU, I want to be able to repeat a transaction by clicking on it in the transaction list.
 - AAU, I want to integrate the ChatGPT API to give users investing advice.
+- AAU, I want historical data to take into account when I first purchased each asset instead of just a backwards extrapolation of my current portfolio value.
 
 ## Poem
 
