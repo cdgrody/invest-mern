@@ -31,7 +31,8 @@ export default function ChartArea({holdings, userBalances, user, transactions}) 
       setMinDollarValue(minDollarValue)
       setMaxDollarValue(maxDollarValue)
       const netWorth = data[data.length-1].dollars
-      if(netWorth) setUserNetWorth(netWorth.toFixed(2)) && setPercentChange((100*(netWorth - data[0].dollars)/(netWorth)).toFixed(2))
+      if(netWorth) setUserNetWorth(netWorth.toFixed(2))
+      if(netWorth) setPercentChange((100*(netWorth - data[0].dollars)/(netWorth)).toFixed(2))
       setData(data)
     }
     if(user) collectData()
