@@ -32,6 +32,7 @@ export default function HoldingsTable({ transactions, holdings }) {
               <th>Shares</th>
               <th>Current Price</th>
               <th>Equity</th>
+              <th>Investment</th>
             </tr>
           </thead>
           <tbody>

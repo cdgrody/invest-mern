@@ -35,6 +35,7 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
   const [newHolding, setNewHolding] = useState({
     asset: 10,
     shares: 0,
+    investment: 0,
     user: user,
   });
 
@@ -109,6 +110,7 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
     evt.preventDefault();
     const multiplier = await universalMultiplier;
     newHolding.shares = multiplier * shareCalculator();
+    newHolding.investment = multiplier * newTransaction.dollars
     const addedHolding = await manageHolding(newHolding, holdingsTracker);
     newTransaction.shares = shareCalculator();
     const addedTransaction = await addTransaction(newTransaction);
@@ -133,6 +135,7 @@ export default function OverviewPage({ user, handleTransactionAdded, userBalance
     setNewHolding({
       asset: 10,
       shares: 0,
+      investment: 0,
       user: user,
     });
     setUniversalMultiplier(1)
