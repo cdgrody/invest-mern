@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = function(req, res, next) {
+  console.log('check token function -------')
   // Check for the token being sent in a header or as a query param
   let token = req.get('Authorization') || req.query.token;
   // Default to null
@@ -11,7 +12,8 @@ module.exports = function(req, res, next) {
   // Check if token is valid and not expired
   jwt.verify(token, process.env.SECRET, function(err, decoded) {
     // Invalid token if err
-    if (err) return next();
+    // if (err) return next();
+    if (err) return res.status(401).json({ error: 'Invalid token' });
     // decoded is the entire token payload
     req.user = decoded.user;
     // If interested in the expiration,
