@@ -40,5 +40,6 @@ function checkToken(req, res) {
 /*-- Helper Functions --*/
 
 function createJWT(user) {
+  console.log('create jwt >>>>>>>>>>>>>>>>>')
   return jwt.sign({ user }, process.env.SECRET, { expiresIn: "24h" });
 }

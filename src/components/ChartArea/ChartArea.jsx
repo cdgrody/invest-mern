@@ -3,6 +3,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { computeUserPerformance } from '../../utilities/crypto-api';
 import { getUserBalances } from '../../utilities/userBalances-api';
 import './ChartArea.css'
+// test comment
 
 export default function ChartArea({holdings, userBalances, user, transactions}) {
 
